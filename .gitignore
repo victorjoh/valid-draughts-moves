@@ -6,7 +6,10 @@ build
 
 # Ignore Eclipse specific files and directories
 bin
+test-output
 .classpath
 .project
-.settings
-test-output
+# Some settings files are generated automatically, those can be ignored.
+.settings/**
+# But we want the project setting to format on save
+!.settings/org.eclipse.jdt.ui.prefs
