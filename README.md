@@ -116,3 +116,33 @@ Create a method that takes the input:
 And returns the output:
 
 1. A list of possible turns as strings.
+
+# Java project
+
+```
+sudo apt install openjdk-17-jdk
+sudo apt install openjdk-17-source
+```
+
+Support for Java 17 in Eclipse was added in version 4.21. To see which version
+you have, look at Help > About Eclipse IDE. https://wiki.eclipse.org/FAQ_How_do_I_upgrade_Eclipse_IDE%3F
+
+The p2 repository can be found here
+https://wiki.eclipse.org/Simultaneous_Release
+
+I bricked my Eclipse installation following these procedures, an alternative is to install a new Eclipse installation from scratch, it is pretty painless. You'll have to install 3-4 plugins again like TestNG, Sonar and MoreUnit if you use that.
+
+1. Go to Window > Preferences
+2. In Java > Installed JREs, click Add...
+3. Select Standard VM and press Next
+4. Set JRE home to `/usr/lib/jvm/java-17-openjdk-amd64`. The JRE name is defaulted to `java-17-openjdk-amd64` which is fine.
+5. Press Finish
+6. Press Apply and Close
+
+To run the tests with gradle for specific version you can do:
+
+```
+./gradlew test -Dorg.gradle.java.home=/usr/lib/jvm/java-17-openjdk-amd64
+```
+
+where `/usr/lib/jvm/java-17-openjdk-amd64` is the path to your java 17 installation.
