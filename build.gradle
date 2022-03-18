@@ -1,0 +1,15 @@
+plugins {
+	id 'java-library'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testImplementation 'org.testng:testng:7.4.0'
+}
+
+tasks.named('test') {
+	useTestNG()
+}
