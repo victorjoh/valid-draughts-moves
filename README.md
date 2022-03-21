@@ -7,9 +7,7 @@ international draughts board position.
 
 <figure align="center">
    <img src="images/starting-position.svg" style="width:50%">
-   <figcaption align="center">
-      starting position
-   </figcaption>
+   <figcaption align="center">starting position</figcaption>
 </figure>
 
 1. The game is played on a board with 10×10 squares, alternatingly dark and
@@ -45,9 +43,7 @@ there are
    the captured piece.
    <figure align="center">
       <img src="images/king-capture.svg" style="width:50%">
-      <figcaption align="center">
-         king capture example
-      </figcaption>
+      <figcaption align="center">king capture example</figcaption>
    </figure>
 
 7. Only one piece can be captured per jump. But it is possible to capture
