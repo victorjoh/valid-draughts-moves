@@ -5,6 +5,13 @@ international draughts board position.
 
 # Game rules
 
+<figure align="center">
+   <img src="images/starting-position.svg" style="width:50%">
+   <figcaption align="center">
+      starting position
+   </figcaption>
+</figure>
+
 1. The game is played on a board with 10×10 squares, alternatingly dark and
    light. The lower-leftmost square should be dark.
 2. Each player has 20 pieces. In the starting position (see illustration) the
@@ -21,12 +28,8 @@ there are
 
 1. Pieces (men and kings) can only move on the dark squares, i.e. the white
    squares are always empty.
-2. Men move one space diagonally forward per turn (with the exception of
-   capturing).
-```
- . .       w .                  b .       . .
-. w   to  . .   for white, or  . .   to  . b   for black
-```
+2. Men can only move one space diagonally forward per turn (with the exception
+   of capturing).
 3. Kings move multiple spaces diagonally forward or backwards. A king can only
    move in one direction per turn (with the exception of capturing).
 4. Capturing is made by jumping – a man captures by moving two consecutive steps
@@ -40,6 +43,13 @@ there are
    land adjacent to the captured piece, he can land on any free square behind
    the captured piece, given that no other piece is between that free square and
    the captured piece.
+   <figure align="center">
+      <img src="images/king-capture.svg" style="width:50%">
+      <figcaption align="center">
+         king capture example
+      </figcaption>
+   </figure>
+
 7. Only one piece can be captured per jump. But it is possible to capture
    multiple pieces per turn, with multiple jumps.
 8. It is not possible to capture or move past pieces of the same color.
