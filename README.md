@@ -30,6 +30,8 @@ there are
 2. Men can only move one space diagonally forward per turn (with the exception
    of capturing).
 
+   ![Man move example](images/man-move.svg "Man move example")
+
 3. Kings move multiple spaces diagonally forward or backwards. A king can only
    move in one direction per turn (with the exception of capturing).
 
@@ -43,7 +45,7 @@ there are
    between jumps. Here's an example turn for a man:
 
    ![Man capture example](images/man-capture.svg "Man capture example")
-   
+
 6. Kings captures just like men with the exception that a king does not have to
    be adjacent to a piece to jump over it. Additionally, he does not need to
    land adjacent to the captured piece, he can land on any free square behind
