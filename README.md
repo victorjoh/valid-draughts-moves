@@ -5,17 +5,17 @@ international draughts board position.
 
 # Game rules
 
-<figure align="center">
-   <img src="images/starting-position.svg" style="width:50%">
-   <figcaption align="center">starting position</figcaption>
-</figure>
+![King capture example](images/starting-position.svg "King capture example")
 
 1. The game is played on a board with 10×10 squares, alternatingly dark and
    light. The lower-leftmost square should be dark.
+
 2. Each player has 20 pieces. In the starting position (see illustration) the
    pieces are placed on the first four rows closest to the players. This leaves
    two central rows empty.
+
 3. There are two types of pieces, men and kings.
+
 4. A player wins when the opponent does not have any pieces left or the opponent
    cannot make a move.
 
@@ -26,40 +26,53 @@ there are
 
 1. Pieces (men and kings) can only move on the dark squares, i.e. the white
    squares are always empty.
+
 2. Men can only move one space diagonally forward per turn (with the exception
    of capturing).
+
 3. Kings move multiple spaces diagonally forward or backwards. A king can only
    move in one direction per turn (with the exception of capturing).
+
 4. Capturing is made by jumping – a man captures by moving two consecutive steps
    in the same direction, jumping over a single piece (man or king) on the first
    step. Multiple opposing pieces may be captured in a single turn if this is
-   done by successive jumps made by a single man.
+   done by successive jumps made by a single man. When capturing men, can jump
+   backwards.
+
 5. Pieces can jump both diagonally forwards and backwards. And change direction
-   between jumps.
+   between jumps. Here's an example turn for a man:
+
+   ![Man capture example](images/man-capture.svg "Man capture example")
+   
 6. Kings captures just like men with the exception that a king does not have to
    be adjacent to a piece to jump over it. Additionally, he does not need to
    land adjacent to the captured piece, he can land on any free square behind
    the captured piece, given that no other piece is between that free square and
-   the captured piece.
-   <figure align="center">
-      <img src="images/king-capture.svg" style="width:50%">
-      <figcaption align="center">king capture example</figcaption>
-   </figure>
+   the captured piece. Here's an example turn:
+   
+   ![King capture example](images/king-capture.svg "King capture example")
 
 7. Only one piece can be captured per jump. But it is possible to capture
    multiple pieces per turn, with multiple jumps.
-8. It is not possible to capture or move past pieces of the same color.
+
+8. It is not possible to capture or jump over pieces of the same color.
+
 9. Capturing is absolutely mandatory. If there is a capture possible for the
    player, they have to do it.
+
 10. If a player has several capture options, it’s compulsory to capture the
    maximum amount of the opponent's pieces.
+
 11. A man ending his turn on the last row becomes king. We say it’s crowned.
+
 12. A man is crowned (he becomes king) only if he finishes his move on the last
    row. In the situation depicted in the image below, man does not become king,
    since the the man is forced to do a jump that does let him end his turn on
    the last row.
+
 13. When a man is crowned, he cannot continue capturing as a king in the same
     turn.
+
 14. A captured piece is not removed from the board until the turn is over. A
     captured piece cannot be jumped over a second time in the same turn.
 
@@ -72,8 +85,8 @@ visual.
 
 ## Board position
 
-1. A space indicates a light square.
-2. A dot indicates an empty dark square.
+1. A dot indicates a light square.
+2. An underscore indicates an empty dark square.
 3. Lowercase w indicates a white man.
 4. Lowercase b indicates a black man.
 5. Capital K indicates a white king (Capital W looks too visually similar to w).
@@ -82,16 +95,16 @@ visual.
 
 Here is an example board:
 ```
- K . . . .
-. b . . . 
- . . b . .
-. . . . b 
- . . . b .
-. . . w . 
- . . . . b
-. . w b w 
- . . . . .
-. B w . . 
+.K._._._._
+_.b._._._.
+._._.b._._
+_._._._.b.
+._._._.b._
+_._._.w._.
+._._._._.b
+_._.w.b.w.
+._._._._._
+_.B.w._._.
 ```
 
 ## Turn
@@ -126,6 +139,14 @@ Create a method that takes the input:
 And returns the output:
 
 1. A list of possible turns as strings.
+
+For example, if the starting position is given as input (see first illustration
+in this README), and it is white's turn, then the result should be:
+
+```
+[04-15, 24-15, 24-35, 44-35, 44-55, 64-55, 64-75, 84-75, 84-95]
+```
+Order does not matter.
 
 # Java project
 
