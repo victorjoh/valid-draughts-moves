@@ -76,7 +76,7 @@ there are
    since the the man is forced to do a jump that does not let him end his turn
    on the last row.
 
-      ![Not capture example](images/not-crowned.svg "Not capture example")
+      ![Not crowned example](images/not-crowned.svg "Not crowned example")
 
 13. When a man is crowned, he cannot continue capturing as a king in the same
     turn.
