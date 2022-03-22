@@ -14,7 +14,8 @@ international draughts board position.
    pieces are placed on the first four rows closest to the players. This leaves
    two central rows empty.
 
-3. There are two types of pieces, men and kings.
+3. There are two types of pieces, men and kings. In the beginning all pieces are
+   men.
 
 4. A player wins when the opponent does not have any pieces left or the opponent
    cannot make a move.
@@ -34,11 +35,13 @@ there are
 
 3. Kings move multiple spaces diagonally forward or backwards. A king can only
    move in one direction per turn (with the exception of capturing).
+   
+   ![King move example](images/king-move.svg "King move example")
 
 4. Capturing is made by jumping – a man captures by moving two consecutive steps
    in the same direction, jumping over a single piece (man or king) on the first
    step. Multiple opposing pieces may be captured in a single turn if this is
-   done by successive jumps made by a single man. When capturing men, can jump
+   done by successive jumps made by a single man. When capturing, men can jump
    backwards.
 
 5. Pieces can jump both diagonally forwards and backwards. And change direction
@@ -57,7 +60,8 @@ there are
 7. Only one piece can be captured per jump. But it is possible to capture
    multiple pieces per turn, with multiple jumps.
 
-8. It is not possible to capture or jump over pieces of the same color.
+8. It is not possible to capture or jump over pieces of the same color. It is
+   also not possible for a piece to end a turn ontop of another piece.
 
 9. Capturing is absolutely mandatory. If there is a capture possible for the
    player, they have to do it.
