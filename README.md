@@ -49,7 +49,7 @@ there are
    land adjacent to the captured piece, he can land on any free square behind
    the captured piece, given that no other piece is between that free square and
    the captured piece. Here's an example turn:
-   
+
    ![King capture example](images/king-capture.svg "King capture example")
 
 7. Only one piece can be captured per jump. But it is possible to capture
@@ -67,8 +67,10 @@ there are
 
 12. A man is crowned (he becomes king) only if he finishes his move on the last
    row. In the situation depicted in the image below, man does not become king,
-   since the the man is forced to do a jump that does let him end his turn on
-   the last row.
+   since the the man is forced to do a jump that does not let him end his turn
+   on the last row.
+
+      ![Not capture example](images/not-crowned.svg "Not capture example")
 
 13. When a man is crowned, he cannot continue capturing as a king in the same
     turn.
