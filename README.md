@@ -41,11 +41,10 @@ there are
 4. Capturing is made by jumping – a man captures by moving two consecutive steps
    in the same direction, jumping over a single piece (man or king) on the first
    step. Multiple opposing pieces may be captured in a single turn if this is
-   done by successive jumps made by a single man. When capturing, men can jump
-   backwards.
+   done by successive jumps made by a single man.
 
-5. Pieces can jump both diagonally forwards and backwards. And change direction
-   between jumps. Here's an example turn for a man:
+5. When capturing, pieces can jump both diagonally forwards and backwards. It is
+   possible to change direction between jumps. Here's an example turn for a man:
 
    ![Man capture example](images/man-capture.svg "Man capture example")
 
