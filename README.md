@@ -1,7 +1,24 @@
 # Valid Draughts Moves
 
-A test driven development kata where we list all valid moves given an
-international draughts board position.
+[International draughts](https://en.wikipedia.org/wiki/International_draughts)
+(also called Polish draughts or international checkers) is a strategy board game
+for two players, one of the variants of draughts. In this kata we will use the
+outside-in classist test-driven development approach to list all valid moves in
+any given board position.
+
+# Preparation
+Read Martin Fowler's two articles: 1) [Test-Driven
+Development](https://martinfowler.com/bliki/TestDrivenDevelopment.html) and 2)
+[Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html).
+
+Watch [Outside-In Classicist TDD by Sandro Mancuso - Mars
+Rover](https://www.youtube.com/watch?v=24vzFAvOzo0) to see how to use classist
+TDD in practice. Also pay attention to the IDE shortcuts that he uses, maybe
+there is something worth picking up.
+
+Read through this README.
+
+Setup your environment, clone the repo and import it into your IDE.
 
 # Game rules
 
@@ -22,8 +39,9 @@ international draughts board position.
 
 ## A turn
 
-The black and white players will alternate turns until the game ends. In a turn
-there are 
+The black and white players will alternate turns until the game ends. In the
+example images below, we assume that white starts from the bottom and black
+starts from the top. A single turn has the following rules:
 
 1. Pieces (men and kings) can only move on the dark squares, i.e. the white
    squares are always empty.
@@ -155,24 +173,27 @@ in this README), and it is white's turn, then the result should be:
 ```
 Order does not matter.
 
-# Java project
+# Environment Setup
 
+I suggest that you use Java 17 since it is the only LTS Java release with
+support for text blocks. Text blocks will come in handy because of how we
+represent the board.
+
+On linux, Java 17 is installed with:
 ```
 sudo apt install openjdk-17-jdk
 sudo apt install openjdk-17-source
 ```
 
 Support for Java 17 in Eclipse was added in version 4.21. To see which version
-you have, look at Help > About Eclipse IDE.
-https://wiki.eclipse.org/FAQ_How_do_I_upgrade_Eclipse_IDE%3F
+you have, look at Help > About Eclipse IDE. If you have an
+older version, you'll have to
+[upgrade](https://unifaun.atlassian.net/wiki/spaces/GD/pages/156646247/Eclipse#Upgrading-existing-Eclipse-IDE-and-Installed-Features-to-newer-release)
+or install to a newer version. If you choose to install a new version, you'll
+have to install your plugins again like TestNG, Sonar, MoreUnit and MagicLabel
+if you use that.
 
-The p2 repository can be found here
-https://wiki.eclipse.org/Simultaneous_Release
-
-I bricked my Eclipse installation following these procedures, an alternative is
-to install a new Eclipse installation from scratch, it is pretty painless.
-You'll have to install 3-4 plugins again like TestNG, Sonar and MoreUnit if you
-use that.
+Make Java 17 available in Eclipse by doing the following:
 
 1. Go to Window > Preferences
 2. In Java > Installed JREs, click Add...
@@ -182,7 +203,8 @@ use that.
 5. Press Finish
 6. Press Apply and Close
 
-To run the tests with gradle for specific version you can do:
+If you want to run the tests with java 17 without changing any environment
+variables, you can do it like this:
 
 ```
 ./gradlew test -Dorg.gradle.java.home=/usr/lib/jvm/java-17-openjdk-amd64
@@ -190,3 +212,16 @@ To run the tests with gradle for specific version you can do:
 
 where `/usr/lib/jvm/java-17-openjdk-amd64` is the path to your java 17
 installation.
+
+## Eclipse import
+Clone this repo with the command:
+```
+git clone git@bitbucket.org:unifaun/valid-draughts-moves.git
+```
+Import the project as a Gradle project in Eclipse or your preferred IDE. In
+Eclipse, you can import the project via:
+
+1. File > Import...
+2. Select Existing Gradle Project
+3. Select the directory in which this README exists
+4. Press Finish
