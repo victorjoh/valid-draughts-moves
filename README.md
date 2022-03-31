@@ -18,7 +18,8 @@ there is something worth picking up.
 
 Read through this README.
 
-Setup your environment, clone the repo and import it into your IDE.
+Setup your environment, clone the repo and import it into your IDE, see sections
+at the bottom.
 
 # Game rules
 
