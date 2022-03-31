@@ -3,7 +3,7 @@ package valid.draughts.moves;
 import java.util.List;
 
 interface Piece {
-	List<String> getMoves();
+	List<Move> getMoves();
 
 	void setSquare(DarkSquare square);
 }

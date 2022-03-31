@@ -9,11 +9,11 @@ abstract class Man implements Piece {
 	DarkSquare square;
 
 	@Override
-	public List<String> getMoves() {
+	public List<Move> getMoves() {
 		return Stream.of(getForwardLeftSquare(), getForwardRightSquare())
 				.filter(Optional::isPresent)
 				.map(Optional::get)
-				.map(targetSquare -> square.getId() + "-" + targetSquare.getId())
+				.map(targetSquare -> new Move(square, targetSquare))
 				.toList();
 	}
 
@@ -25,5 +25,4 @@ abstract class Man implements Piece {
 	public void setSquare(DarkSquare square) {
 		this.square = square;
 	}
-
 }

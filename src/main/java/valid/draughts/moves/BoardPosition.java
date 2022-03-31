@@ -9,15 +9,15 @@ class BoardPosition {
 	private List<Piece> whitePieces = new ArrayList<>();
 	private List<Row> rows = new ArrayList<>();
 
-	List<String> getWhitePlayerMoves() {
+	List<Move> getWhitePlayerMoves() {
 		return getMoves(whitePieces);
 	}
 
-	List<String> getBlackPlayerMoves() {
+	List<Move> getBlackPlayerMoves() {
 		return getMoves(blackPieces);
 	}
 
-	private static List<String> getMoves(List<Piece> pieces) {
+	private static List<Move> getMoves(List<Piece> pieces) {
 		return pieces.stream()
 				.findFirst()
 				.map(Piece::getMoves)

@@ -12,17 +12,18 @@ public class Draughts {
 	private static final char BLACK_MAN = 'b';
 	private static final char DARK_SQUARE = '_';
 
-	public boolean someLibraryMethod() {
-		return true;
-	}
-
 	public List<String> getValidMoves(PlayerColor player, String position) {
 		BoardPosition boardPosition = parseBoardPosition(position);
+
+		List<Move> moves;
 		if (player == WHITE) {
-			return boardPosition.getWhitePlayerMoves();
+			moves = boardPosition.getWhitePlayerMoves();
 		} else {
-			return boardPosition.getBlackPlayerMoves();
+			moves = boardPosition.getBlackPlayerMoves();
 		}
+		return moves.stream()
+				.map(Move::toString)
+				.toList();
 	}
 
 	private BoardPosition parseBoardPosition(String boardPosition) {
@@ -43,7 +44,7 @@ public class Draughts {
 						parsedBoardPosition.addWhitePiece(whiteMan);
 						break;
 					case WHITE_KING:
-						WhiteMan whiteKing = new WhiteMan();
+						WhiteKing whiteKing = new WhiteKing();
 						currentRow.add(new DarkSquare(x, y, whiteKing));
 						parsedBoardPosition.addWhitePiece(whiteKing);
 						break;
