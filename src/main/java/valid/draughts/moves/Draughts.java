@@ -10,19 +10,20 @@ public class Draughts {
 	private static final char WHITE_MAN = 'w';
 	private static final char WHITE_KING = 'K';
 	private static final char BLACK_MAN = 'b';
+	private static final char BLACK_KING = 'B';
 	private static final char DARK_SQUARE = '_';
 
 	public List<String> getValidMoves(PlayerColor player, String position) {
 		BoardPosition boardPosition = parseBoardPosition(position);
 
-		List<Move> moves;
+		List<Turn> turns;
 		if (player == WHITE) {
-			moves = boardPosition.getWhitePlayerMoves();
+			turns = boardPosition.getWhitePlayerTurns();
 		} else {
-			moves = boardPosition.getBlackPlayerMoves();
+			turns = boardPosition.getBlackPlayerTruns();
 		}
-		return moves.stream()
-				.map(Move::toString)
+		return turns.stream()
+				.map(Turn::toString)
 				.toList();
 	}
 
@@ -44,7 +45,7 @@ public class Draughts {
 						parsedBoardPosition.addWhitePiece(whiteMan);
 						break;
 					case WHITE_KING:
-						WhiteKing whiteKing = new WhiteKing();
+						King whiteKing = new King();
 						currentRow.add(new DarkSquare(x, y, whiteKing));
 						parsedBoardPosition.addWhitePiece(whiteKing);
 						break;
@@ -52,6 +53,11 @@ public class Draughts {
 						BlackMan blackMan = new BlackMan();
 						currentRow.add(new DarkSquare(x, y, blackMan));
 						parsedBoardPosition.addBlackPiece(blackMan);
+						break;
+					case BLACK_KING:
+						King blackKing = new King();
+						currentRow.add(new DarkSquare(x, y, blackKing));
+						parsedBoardPosition.addBlackPiece(blackKing);
 						break;
 					default:
 						// ignore other pieces

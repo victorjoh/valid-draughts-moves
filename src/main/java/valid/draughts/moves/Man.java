@@ -9,12 +9,19 @@ abstract class Man implements Piece {
 	DarkSquare square;
 
 	@Override
-	public List<Move> getMoves() {
+	public List<Turn> getPossibleTurns() {
 		return Stream.of(getForwardLeftSquare(), getForwardRightSquare())
 				.filter(Optional::isPresent)
 				.map(Optional::get)
-				.map(targetSquare -> new Move(square, targetSquare))
+				.map(this::getTurn)
 				.toList();
+	}
+
+	private Turn getTurn(DarkSquare targetSquare) {
+		if (targetSquare.getPiece().isPresent()) {
+			return new Move(square, targetSquare.getTopRightSquare().get());
+		}
+		return new Move(square, targetSquare);
 	}
 
 	abstract Optional<DarkSquare> getForwardLeftSquare();

@@ -39,10 +39,6 @@ class DarkSquare {
 		piece.setSquare(this);
 	}
 
-	public boolean hasWhiteMan() {
-		return piece != null;
-	}
-
 	public Optional<Piece> getPiece() {
 		return piece;
 	}

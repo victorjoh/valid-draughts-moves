@@ -6,18 +6,25 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-class WhiteKing implements Piece {
+class King implements Piece {
 	DarkSquare square;
 
 	@Override
-	public List<Move> getMoves() {
-		return Stream.of((Function<DarkSquare, Optional<DarkSquare>>)
+	public List<Turn> getPossibleTurns() {
+		var directions = Stream.of((Function<DarkSquare, Optional<DarkSquare>>)
+				DarkSquare::getTopLeftSquare,
 				DarkSquare::getTopRightSquare,
-				DarkSquare::getBottomLeftSquare)
+				DarkSquare::getBottomLeftSquare,
+				DarkSquare::getBottomRightSquare);
+		return directions
 				.map(this::getAllSquaresTowards)
 				.flatMap(List::stream)
-				.map(targetSquare -> new Move(square, targetSquare))
+				.map(this::getTurn)
 				.toList();
+	}
+
+	private Turn getTurn(DarkSquare targetSquare) {
+		return new Move(square, targetSquare);
 	}
 
 	private List<DarkSquare> getAllSquaresTowards(
@@ -37,4 +44,5 @@ class WhiteKing implements Piece {
 	public void setSquare(DarkSquare square) {
 		this.square = square;
 	}
+
 }

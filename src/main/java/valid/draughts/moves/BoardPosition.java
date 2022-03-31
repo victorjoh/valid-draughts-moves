@@ -9,18 +9,18 @@ class BoardPosition {
 	private List<Piece> whitePieces = new ArrayList<>();
 	private List<Row> rows = new ArrayList<>();
 
-	List<Move> getWhitePlayerMoves() {
-		return getMoves(whitePieces);
+	List<Turn> getWhitePlayerTurns() {
+		return getTurns(whitePieces);
 	}
 
-	List<Move> getBlackPlayerMoves() {
-		return getMoves(blackPieces);
+	List<Turn> getBlackPlayerTruns() {
+		return getTurns(blackPieces);
 	}
 
-	private static List<Move> getMoves(List<Piece> pieces) {
+	private static List<Turn> getTurns(List<Piece> pieces) {
 		return pieces.stream()
 				.findFirst()
-				.map(Piece::getMoves)
+				.map(Piece::getPossibleTurns)
 				.orElse(List.of());
 	}
 

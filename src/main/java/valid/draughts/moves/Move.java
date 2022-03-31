@@ -1,6 +1,6 @@
 package valid.draughts.moves;
 
-class Move {
+class Move implements Turn {
 	private DarkSquare source;
 	private DarkSquare target;
 
