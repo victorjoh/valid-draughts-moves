@@ -54,7 +54,7 @@ public class Draughts {
 						parsedBoardPosition.addBlackPiece(blackMan);
 						break;
 					default:
-						// ignore other characters
+						// ignore other pieces
 				}
 			}
 			parsedBoardPosition.add(currentRow);

@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 
 // 9:00
 // 12:00
+// 13:00
+// 14:44
 public class DraughtsTest {
 	private Draughts draughts;
 
