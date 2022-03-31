@@ -1,5 +1,8 @@
 plugins {
 	id 'java-library'
+	// use this over buildship, since with buildship dependencies cannot be
+	// resolved after changes to source files
+	id 'eclipse'
 }
 
 repositories {
