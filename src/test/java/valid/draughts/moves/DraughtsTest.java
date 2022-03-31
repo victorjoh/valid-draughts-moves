@@ -12,11 +12,18 @@ import org.testng.annotations.Test;
 
 // 9:00
 // 12:00
+// 3
 
 // 13:00
 // 14:44
+// 1:45
 
 // 15:50
+// 16:50
+// 1
+
+// 5:45
+
 public class DraughtsTest {
 	private Draughts draughts;
 
@@ -125,10 +132,6 @@ public class DraughtsTest {
 						_._
 						.b.
 						w._""", List.of("00-22") },
-				{ """
-						_._
-						.b.
-						_.w""", List.of("20-02") },
 		};
 	}
 
