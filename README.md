@@ -4,7 +4,7 @@
 (also called Polish draughts or international checkers) is a strategy board game
 for two players, one of the variants of draughts. In this kata we will use the
 outside-in classicist test-driven development approach to list all valid moves
-in any given board position.
+in any given board position. We solve the kata in pairs.
 
 # Preparation
 Read Martin Fowler's two articles: 1) [Test-Driven
@@ -12,7 +12,7 @@ Development](https://martinfowler.com/bliki/TestDrivenDevelopment.html) and 2)
 [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html).
 The first article is to review what TDD is and the second one is to understand
 what classicist TDD means by comparing it to mockist TDD (maybe we can try
-mockist TDD in a later Kata).
+mockist TDD in a later kata).
 
 Watch [Outside-In Classicist TDD by Sandro Mancuso - Mars
 Rover](https://www.youtube.com/watch?v=24vzFAvOzo0) to see how to use classicist
@@ -180,7 +180,7 @@ Order does not matter.
 # Strategy
 
 We will use the outside-in classicist test-driven development approach. We do
-TDD by following there steps repeatedly:
+TDD by following these steps repeatedly:
 
 1. Write a test for the next bit of functionality you want to add.
 2. Write the functional code until the test passes.
@@ -191,6 +191,8 @@ to use the real thing.
 
 We use the outside-in approach which means we begin with writing a test for the
 public API.
+
+Switch the person who is writing the code often in the pair.
 
 # Environment Setup
 
