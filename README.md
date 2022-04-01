@@ -222,10 +222,10 @@ git clone git@bitbucket.org:unifaun/valid-draughts-moves.git
 
 You can import the project either as a Gradle project or as a regular Eclipse
 project. I added the second option because I had an annoying problem with Gradle
-project import. The problem I had when importing as Gradle project was that
-after I added an extra third party library, every time that I wanted to run the
-tests I had to do a manual clean. I only had to do a manual clean after making
-changes to the code. I think this is a bug with [Eclipse
+project import using Eclipse Buildship. The problem I had when importing as
+Gradle project was that after I added a third party library, every time that I
+wanted to run the tests I had to do a manual clean. I only had to do a manual
+clean after making changes to the code. I think this is a bug with [Eclipse
 Buildship](https://projects.eclipse.org/projects/tools.buildship) in combination
 with Java 17 and maybe TestNG.
 

@@ -1,5 +1,14 @@
 plugins {
 	id 'java-library'
+
+	// I added this Gradle Eclipse plugin because I had an annoying problem with
+	// Gradle project import using Eclipse Buildship. The problem I had when
+	// importing as Gradle project was that after I added a third party library,
+	// every time that I wanted to run the tests I had to do a manual clean. I
+	// only had to do a manual clean after making changes to the code. I think
+	// this is a bug with Eclipse Buildship in combination with Java 17 and
+	// maybe TestNG.
+	id 'eclipse'
 }
 
 repositories {
