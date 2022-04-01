@@ -3,7 +3,7 @@
 [International draughts](https://en.wikipedia.org/wiki/International_draughts)
 (also called Polish draughts or international checkers) is a strategy board game
 for two players, one of the variants of draughts. In this kata we will use the
-outside-in classist test-driven development approach to list all valid moves in
+outside-in classicist test-driven development approach to list all valid moves in
 any given board position.
 
 # Preparation
@@ -11,17 +11,18 @@ Read Martin Fowler's two articles: 1) [Test-Driven
 Development](https://martinfowler.com/bliki/TestDrivenDevelopment.html) and 2)
 [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html).
 The first article is to review what TDD is and the second one is to understand
-what classicist TDD means by comparing it to mockist TDD.
+what classicist TDD means by comparing it to mockist TDD (maybe we can try
+mockist TDD in the next Kata).
 
 Watch [Outside-In Classicist TDD by Sandro Mancuso - Mars
-Rover](https://www.youtube.com/watch?v=24vzFAvOzo0) to see how to use classist
+Rover](https://www.youtube.com/watch?v=24vzFAvOzo0) to see how to use classicist
 TDD in practice. Also pay attention to the IDE shortcuts that he uses, maybe
 there is something worth picking up.
 
 Read through this README.
 
-Setup your environment, clone the repo and import it into your IDE, see sections
-at the bottom.
+Setup your environment, clone the repo and import it into your IDE. See sections
+at the bottom of this README for suggestions on how to do this.
 
 # Game rules
 
@@ -46,8 +47,8 @@ The black and white players will alternate turns until the game ends. In the
 example images below, we assume that white starts from the bottom and black
 starts from the top. A single turn has the following rules:
 
-1. Pieces (men and kings) can only move on the dark squares, i.e. the white
-   squares are always empty.
+1. Pieces (men and kings) can only move on the dark squares, in other words the
+   white squares are always empty.
 
 2. Men can only move one space diagonally forward per turn (with the exception
    of capturing).
@@ -152,7 +153,7 @@ x-axis, the second digit is the y-axis, like this:
 00    20    40    60    80   
 ```
 
-A move is the starting position and the end positing with a dash between, like
+A move is the starting position and the end position with a dash between, like
 `44-35`. When a piece is captured, we denote that with an "x" instead of a dash
 like this: `44x26`. Each captured piece in a series of captures is denoted with
 an "x", like `71x44x99`.
@@ -161,12 +162,12 @@ an "x", like `71x44x99`.
 
 Create a method that takes the input:
 
-1. A board position as a string in format above
+1. A board position as a string in the format above
 2. The color of the player whose turn it is as an enum
 
 And returns the output:
 
-1. A list of possible turns as strings.
+1. A list of possible turns as strings
 
 For example, if the starting position is given as input (see first illustration
 in this README), and it is white's turn, then the result should be:
@@ -189,12 +190,11 @@ sudo apt install openjdk-17-source
 ```
 
 Support for Java 17 in Eclipse was added in version 4.21. To see which version
-you have, look at Help > About Eclipse IDE. If you have an
-older version, you'll have to
+you have, look at Help > About Eclipse IDE. If you have an older version, you'll
+have to
 [upgrade](https://unifaun.atlassian.net/wiki/spaces/GD/pages/156646247/Eclipse#Upgrading-existing-Eclipse-IDE-and-Installed-Features-to-newer-release)
-or install to a newer version. If you choose to install a new version, you'll
-have to install your plugins again like TestNG, Sonar, MoreUnit and MagicLabel
-if you use that.
+or install a newer version. If you choose to install a new version, you'll have
+to install the plugins that you use again.
 
 Make Java 17 available in Eclipse by doing the following:
 
@@ -206,8 +206,8 @@ Make Java 17 available in Eclipse by doing the following:
 5. Press Finish
 6. Press Apply and Close
 
-If you want to run the tests with Java 17 without changing any environment
-variables, you can do it like this:
+As a sidenote, if you want to run the tests with Java 17 in the terminal without
+changing any environment variables, you can do it like this:
 
 ```
 ./gradlew test -Dorg.gradle.java.home=/usr/lib/jvm/java-17-openjdk-amd64
@@ -222,12 +222,12 @@ Clone this repo with the command:
 git clone git@bitbucket.org:unifaun/valid-draughts-moves.git
 ```
 
-You can import the project either as a Gradle project or as a regular Eclipse
-project. I added the second option because I had an annoying problem with Gradle
-project import using Eclipse Buildship. The problem I had when importing as
-Gradle project was that after I added a third party library, every time that I
-wanted to run the tests I had to do a manual clean. I only had to do a manual
-clean after making changes to the code. I think this is a bug with [Eclipse
+You can import the project either 1) as a Gradle project or 2) as a regular
+Eclipse project. I added the second option because I had an annoying problem
+with Gradle project import. The problem I had when importing as Gradle project
+was that after I added a third party library, every time that I wanted to run
+the tests I had to do a manual clean. I only had to do a manual clean after
+making changes to the code. I think this is a bug with [Eclipse
 Buildship](https://projects.eclipse.org/projects/tools.buildship) in combination
 with Java 17 and maybe TestNG.
 
