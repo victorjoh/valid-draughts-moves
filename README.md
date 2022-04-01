@@ -10,6 +10,8 @@ any given board position.
 Read Martin Fowler's two articles: 1) [Test-Driven
 Development](https://martinfowler.com/bliki/TestDrivenDevelopment.html) and 2)
 [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html).
+The first article is to review what TDD is and the second one is to understand
+what classicist TDD means by comparing it to mockist TDD.
 
 Watch [Outside-In Classicist TDD by Sandro Mancuso - Mars
 Rover](https://www.youtube.com/watch?v=24vzFAvOzo0) to see how to use classist
