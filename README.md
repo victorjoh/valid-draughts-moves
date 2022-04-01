@@ -204,25 +204,57 @@ Make Java 17 available in Eclipse by doing the following:
 5. Press Finish
 6. Press Apply and Close
 
-If you want to run the tests with java 17 without changing any environment
+If you want to run the tests with Java 17 without changing any environment
 variables, you can do it like this:
 
 ```
 ./gradlew test -Dorg.gradle.java.home=/usr/lib/jvm/java-17-openjdk-amd64
 ```
 
-where `/usr/lib/jvm/java-17-openjdk-amd64` is the path to your java 17
+where `/usr/lib/jvm/java-17-openjdk-amd64` is the path to your Java 17
 installation.
 
-## Eclipse import
+## Clone and Eclipse import
 Clone this repo with the command:
 ```
 git clone git@bitbucket.org:unifaun/valid-draughts-moves.git
 ```
-Import the project as a Gradle project in Eclipse or your preferred IDE. In
-Eclipse, you can import the project via:
+
+You can import the project either as a Gradle project or as a regular Eclipse
+project. I added the second option because I had an annoying problem with Gradle
+project import. The problem I had when importing as Gradle project was that
+after I added an extra third party library, every time that I wanted to run the
+tests I had to do a manual clean. I only had to do a manual clean after making
+changes to the code. I think this is a bug with [Eclipse
+Buildship](https://projects.eclipse.org/projects/tools.buildship) in combination
+with Java 17 and maybe TestNG.
+
+### Option 1: Import as Gradle project
+
+Import the project as a Gradle project in Eclipse:
 
 1. File > Import...
 2. Select Existing Gradle Project
 3. Select the directory in which this README exists
 4. Press Finish
+
+### Option 2: Import as regular Eclipse project
+
+For this, we use the gradle plugin called eclipse, which is specified in
+`build.gradle`. To be able to import the project we first run the command:
+```
+./gradlew eclipse
+```
+Then import the project by doing:
+
+1. File > Import...
+2. Select Existing Projects into Workspace
+3. Select the directory in which this README exists
+4. Press Finish
+
+The gradle eclipse plugin has other commands, one useful command is:
+```
+./gradlew cleanEclipse
+```
+which removes Eclipse files that can be generated like `.classpath` and
+`.project`.
