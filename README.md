@@ -12,12 +12,15 @@ Development](https://martinfowler.com/bliki/TestDrivenDevelopment.html) and 2)
 [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html).
 The first article is to review what TDD is and the second one is to understand
 what classicist TDD means by comparing it to mockist TDD (maybe we can try
-mockist TDD in a later kata).
+mockist TDD in a later kata). Feel free to skim over the part where he compares
+two mock libraries if you don't think that is interesting.
 
 Watch [Outside-In Classicist TDD by Sandro Mancuso - Mars
 Rover](https://www.youtube.com/watch?v=24vzFAvOzo0) to see how to use classicist
 TDD in practice. Also pay attention to the IDE shortcuts that he uses, maybe
-there is something worth picking up.
+there is something worth picking up. If you get bored after a while, just skip
+to the [summary in the
+end](https://www.youtube.com/watch?v=24vzFAvOzo0&t=1h19m45s).
 
 Read through this README.
 
@@ -190,7 +193,8 @@ We use the classicist approach which means we use mocks only when it is awkward
 to use the real thing.
 
 We use the outside-in approach which means we begin with writing a test for the
-public API.
+public API. We'll do it like Sandro Mancuso did in his example and only write
+tests for the public API.
 
 When we refactor, we try to stay in the green during the whole refactoring
 process.
