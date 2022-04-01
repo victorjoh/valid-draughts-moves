@@ -173,7 +173,7 @@ For example, if the starting position is given as input (see first illustration
 in this README), and it is white's turn, then the result should be:
 
 ```
-[04-15, 24-15, 24-35, 44-35, 44-55, 64-55, 64-75, 84-75, 84-95]
+[13-04, 13-24, 33-24, 33-44, 53-44, 53-64, 73-64, 73-84, 93-84]
 ```
 Order does not matter.
 
@@ -192,7 +192,10 @@ to use the real thing.
 We use the outside-in approach which means we begin with writing a test for the
 public API.
 
-Switch the person who is writing the code often in the pair.
+When we refactor, we try to stay in the green during the whole refactoring
+process.
+
+Change roles (driver, navigator) often in the pair.
 
 # Environment Setup
 
