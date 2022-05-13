@@ -19,7 +19,7 @@ public class CapturePath implements Path {
 		this.checkpoints.add(landingSquare);
 	}
 
-	public CapturePath(DarkSquareWithMyMan startSquare, Direction endDirection) {
+	public CapturePath(DarkSquareWithPlayerMan startSquare, Direction endDirection) {
 		this.endDirection = endDirection;
 		this.checkpoints.add(startSquare);
 	}
@@ -32,7 +32,7 @@ public class CapturePath implements Path {
 	@Override
 	public String toString() {
 		return checkpoints.stream()
-				.map(square -> "" + square.getX() + square.getY())
+				.map(DarkSquare::getId)
 				.collect(joining("x"));
 	}
 }

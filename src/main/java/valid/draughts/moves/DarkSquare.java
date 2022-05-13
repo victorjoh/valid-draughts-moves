@@ -1,9 +1,32 @@
 package valid.draughts.moves;
 
-interface DarkSquare extends Square {
-	void setAdjacentSquare(Direction fromThisSquare, Square adjecentSquare);
+import java.util.EnumMap;
+import java.util.Map;
 
-	int getX();
+abstract class DarkSquare implements Square {
+	protected final Map<Direction, Square> adjacentSquares;
+	private final int x;
+	private final int y;
 
-	int getY();
+	DarkSquare(int x, int y) {
+		adjacentSquares = new EnumMap<>(Direction.class);
+		this.x = x;
+		this.y = y;
+	}
+
+	void setAdjacentSquare(Direction fromThisSquare, Square adjecentSquare) {
+		adjacentSquares.put(fromThisSquare, adjecentSquare);
+	}
+
+	int getX() {
+		return x;
+	}
+
+	int getY() {
+		return y;
+	}
+
+	String getId() {
+		return "" + x + y;
+	}
 }

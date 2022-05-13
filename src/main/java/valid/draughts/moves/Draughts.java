@@ -24,7 +24,7 @@ public class Draughts {
 
 	public static List<String> getValidMoves(PlayerColor player, String position) {
 		return parseBoardPosition(player, position).stream()
-				.map(DarkSquareWithMyPiece::getTurns)
+				.map(DarkSquareWithPlayerPiece::getPlayerTurns)
 				.flatMap(Collection::stream)
 				.map(Object::toString)
 				.toList();
@@ -37,7 +37,7 @@ public class Draughts {
 	private static final char DARK_SQUARE = '_';
 	private static final OutOfBoundsSquare OUT_OF_BOUNDS = new OutOfBoundsSquare();
 
-	static List<DarkSquareWithMyPiece> parseBoardPosition(PlayerColor player, String position) {
+	static List<DarkSquareWithPlayerPiece> parseBoardPosition(PlayerColor player, String position) {
 		List<String> rows = Lists.reverse(position.lines().toList());
 
 		char myMan;
@@ -59,7 +59,7 @@ public class Draughts {
 			forward = -1;
 		}
 		
-		List<DarkSquareWithMyPiece> myPieces = new ArrayList<>();
+		List<DarkSquareWithPlayerPiece> myPieces = new ArrayList<>();
 		List<List<DarkSquare>> parsedRows = new ArrayList<>();
 		for (int y = 0; y < rows.size(); y++) {
 			String row = rows.get(y);
@@ -68,11 +68,11 @@ public class Draughts {
 				if (row.charAt(x) == DARK_SQUARE) {
 					parsedRow.add(new EmptyDarkSquare(x, y));
 				} else if (row.charAt(x) == myMan) {
-					DarkSquareWithMyMan darkSquareWithMyMan = new DarkSquareWithMyMan(x, y);
+					DarkSquareWithPlayerMan darkSquareWithMyMan = new DarkSquareWithPlayerMan(x, y);
 					parsedRow.add(darkSquareWithMyMan);
 					myPieces.add(darkSquareWithMyMan);
 				} else if (row.charAt(x) == myKing) {
-					DarkSquareWithMyKing darkSquareWithMyKing = new DarkSquareWithMyKing(x, y);
+					DarkSquareWithPlayerKing darkSquareWithMyKing = new DarkSquareWithPlayerKing(x, y);
 					parsedRow.add(darkSquareWithMyKing);
 					myPieces.add(darkSquareWithMyKing);
 				} else if (row.charAt(x) == opponentMan || row.charAt(x) == opponentKing) {
@@ -109,9 +109,9 @@ public class Draughts {
 	}
 
 	class BoardPosition {
-		List<DarkSquareWithMyPiece> myPieces;
+		List<DarkSquareWithPlayerPiece> myPieces;
 
-		public void addMyPiece(DarkSquareWithMyPiece myPiece) {
+		public void addMyPiece(DarkSquareWithPlayerPiece myPiece) {
 			myPieces.add(myPiece);
 		}
 	}

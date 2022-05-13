@@ -1,25 +1,12 @@
 package valid.draughts.moves;
 
-import static java.util.Collections.emptyList;
-
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
-class EmptyDarkSquare implements DarkSquare {
-	private final Map<Direction, Square> adjacentSquares = new EnumMap<>(Direction.class);
-	private final int x;
-	private final int y;
+class EmptyDarkSquare extends DarkSquare {
 
-	public EmptyDarkSquare(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	@Override
-	public void setAdjacentSquare(Direction fromThisSquare, Square adjecentSquare) {
-		adjacentSquares.put(fromThisSquare, adjecentSquare);
+	EmptyDarkSquare(int x, int y) {
+		super(x, y);
 	}
 
 	@Override
@@ -28,31 +15,16 @@ class EmptyDarkSquare implements DarkSquare {
 	}
 
 	@Override
-	public List<Turn> jumpOverWithMan(CapturePath pathSoFar) {
-		return emptyList();
-	}
-
-	@Override
 	public List<Turn> landCaptureWithMan(CapturePath pathSoFar) {
 		return List.of(new Turn(new CapturePath(pathSoFar, this)));
 	}
 
 	@Override
-	public List<Turn> endKingMove(MovePath pathSoFar) {
+	public List<Turn> movePlayerKing(MovePath pathSoFar) {
 		List<Turn> possibleTurns = new ArrayList<>();
 		MovePath pathUpToThis = new MovePath(pathSoFar, this);
 		possibleTurns.add(new Turn(pathUpToThis));
-		possibleTurns.addAll(adjacentSquares.get(pathSoFar.getDirection()).endKingMove(pathUpToThis));
+		possibleTurns.addAll(adjacentSquares.get(pathSoFar.getDirection()).movePlayerKing(pathUpToThis));
 		return possibleTurns;
-	}
-
-	@Override
-	public int getX() {
-		return x;
-	}
-
-	@Override
-	public int getY() {
-		return y;
 	}
 }

@@ -2,13 +2,14 @@ package valid.draughts.moves;
 
 public class MovePath implements Path {
 	private final Direction endDirection;
-	private DarkSquareWithMyPiece start;
-	private EmptyDarkSquare end;
+	private final DarkSquareWithPlayerPiece start;
+	private final EmptyDarkSquare end;
 
 
-	public MovePath(DarkSquareWithMyPiece start, Direction endDirection) {
+	public MovePath(DarkSquareWithPlayerPiece start, Direction endDirection) {
 		this.start = start;
 		this.endDirection = endDirection;
+		this.end = null;
 	}
 
 	public MovePath(MovePath pathSoFar, EmptyDarkSquare end) {
@@ -24,6 +25,6 @@ public class MovePath implements Path {
 
 	@Override
 	public String toString() {
-		return "" + start.getX() + start.getY() + '-' + end.getX() + end.getY();
+		return start.getId() + '-' + end.getId();
 	}
 }
