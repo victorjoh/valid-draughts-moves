@@ -6,31 +6,10 @@ import static valid.draughts.moves.PlayerColor.WHITE;
 
 import java.util.List;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-// 9:00
-// 12:00
-// 3
-
-// 13:00
-// 14:44
-// 1:45
-
-// 15:50
-// 16:50
-// 1
-
-// 5:45
-
 public class DraughtsTest {
-	private Draughts draughts;
-
-	@BeforeMethod
-	void setup() {
-		draughts = new Draughts();
-	}
 
 	@DataProvider
 	Object[][] white_man_move_turns() {
@@ -55,7 +34,7 @@ public class DraughtsTest {
 
 	@Test(dataProvider = "white_man_move_turns")
 	void white_man_moves_one_step_forward(String position, List<String> expectedMoves) {
-		assertThat(draughts.getValidMoves(WHITE, position))
+		assertThat(Draughts.getValidMoves(WHITE, position))
 				.containsAll(expectedMoves);
 	}
 
@@ -70,7 +49,7 @@ public class DraughtsTest {
 
 	@Test(dataProvider = "black_man_move_turns")
 	void black_man_moves_one_step_forward(String position, List<String> expectedMoves) {
-		assertThat(draughts.getValidMoves(BLACK, position))
+		assertThat(Draughts.getValidMoves(BLACK, position))
 				.containsAll(expectedMoves);
 	}
 
@@ -105,7 +84,7 @@ public class DraughtsTest {
 
 	@Test(dataProvider = "white_king_move_turns")
 	void white_king_moves_multiple_steps_in_any_direction(String position, List<String> expectedMoves) {
-		assertThat(draughts.getValidMoves(WHITE, position))
+		assertThat(Draughts.getValidMoves(WHITE, position))
 				.containsAll(expectedMoves);
 	}
 
@@ -121,7 +100,7 @@ public class DraughtsTest {
 
 	@Test(dataProvider = "black_king_move_turns")
 	void black_king_moves_multiple_steps_in_any_direction(String position, List<String> expectedMoves) {
-		assertThat(draughts.getValidMoves(BLACK, position))
+		assertThat(Draughts.getValidMoves(BLACK, position))
 				.containsAll(expectedMoves);
 	}
 
@@ -131,13 +110,13 @@ public class DraughtsTest {
 				{ """
 						_._
 						.b.
-						w._""", List.of("00-22") },
+						w._""", List.of("00x22") },
 		};
 	}
 
 	@Test(dataProvider = "white_man_capture_turns")
 	void white_man_can_capture_black_pieces(String position, List<String> expectedMoves) {
-		assertThat(draughts.getValidMoves(WHITE, position))
+		assertThat(Draughts.getValidMoves(WHITE, position))
 				.containsAll(expectedMoves);
 	}
 }

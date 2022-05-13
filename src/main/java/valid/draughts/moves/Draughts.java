@@ -1,71 +1,118 @@
 package valid.draughts.moves;
 
+import static valid.draughts.moves.Direction.BACKWARDS_LEFT;
+import static valid.draughts.moves.Direction.BACKWARDS_RIGHT;
+import static valid.draughts.moves.Direction.FORWARD_LEFT;
+import static valid.draughts.moves.Direction.FORWARD_RIGHT;
 import static valid.draughts.moves.PlayerColor.WHITE;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.google.common.collect.Lists;
 
 public class Draughts {
+
+	@SafeVarargs
+	public static <T> List<T> concatenate(List<T>... lists) {
+		return Stream.of(lists)
+				.flatMap(Collection::stream)
+				.toList();
+	}
+
+	public static List<String> getValidMoves(PlayerColor player, String position) {
+		return parseBoardPosition(player, position).stream()
+				.map(DarkSquareWithMyPiece::getTurns)
+				.flatMap(Collection::stream)
+				.map(Object::toString)
+				.toList();
+	}
+
 	private static final char WHITE_MAN = 'w';
 	private static final char WHITE_KING = 'K';
 	private static final char BLACK_MAN = 'b';
 	private static final char BLACK_KING = 'B';
 	private static final char DARK_SQUARE = '_';
+	private static final OutOfBoundsSquare OUT_OF_BOUNDS = new OutOfBoundsSquare();
 
-	public List<String> getValidMoves(PlayerColor player, String position) {
-		BoardPosition boardPosition = parseBoardPosition(position);
+	static List<DarkSquareWithMyPiece> parseBoardPosition(PlayerColor player, String position) {
+		List<String> rows = Lists.reverse(position.lines().toList());
 
-		List<Turn> turns;
-		if (player == WHITE) {
-			turns = boardPosition.getWhitePlayerTurns();
+		char myMan;
+		char myKing;
+		char opponentMan;
+		char opponentKing;
+		int forward;
+		if (player.equals(WHITE)) {
+			myMan = WHITE_MAN;
+			myKing = WHITE_KING;
+			opponentMan = BLACK_MAN;
+			opponentKing = BLACK_KING;
+			forward = 1;
 		} else {
-			turns = boardPosition.getBlackPlayerTruns();
+			myMan = BLACK_MAN;
+			myKing = BLACK_KING;
+			opponentMan = WHITE_MAN;
+			opponentKing = WHITE_KING;
+			forward = -1;
 		}
-		return turns.stream()
-				.map(Turn::toString)
-				.toList();
-	}
-
-	private BoardPosition parseBoardPosition(String boardPosition) {
-		List<String> rows = Lists.reverse(boardPosition.lines().toList());
-		BoardPosition parsedBoardPosition = new BoardPosition();
-
+		
+		List<DarkSquareWithMyPiece> myPieces = new ArrayList<>();
+		List<List<DarkSquare>> parsedRows = new ArrayList<>();
 		for (int y = 0; y < rows.size(); y++) {
 			String row = rows.get(y);
-			Row currentRow = new Row();
+			List<DarkSquare> parsedRow = new ArrayList<>();
 			for (int x = 0; x < row.length(); x++) {
-				switch (row.charAt(x)) {
-					case DARK_SQUARE:
-						currentRow.add(new DarkSquare(x, y));
-						break;
-					case WHITE_MAN:
-						WhiteMan whiteMan = new WhiteMan();
-						currentRow.add(new DarkSquare(x, y, whiteMan));
-						parsedBoardPosition.addWhitePiece(whiteMan);
-						break;
-					case WHITE_KING:
-						King whiteKing = new King();
-						currentRow.add(new DarkSquare(x, y, whiteKing));
-						parsedBoardPosition.addWhitePiece(whiteKing);
-						break;
-					case BLACK_MAN:
-						BlackMan blackMan = new BlackMan();
-						currentRow.add(new DarkSquare(x, y, blackMan));
-						parsedBoardPosition.addBlackPiece(blackMan);
-						break;
-					case BLACK_KING:
-						King blackKing = new King();
-						currentRow.add(new DarkSquare(x, y, blackKing));
-						parsedBoardPosition.addBlackPiece(blackKing);
-						break;
-					default:
-						// ignore other pieces
+				if (row.charAt(x) == DARK_SQUARE) {
+					parsedRow.add(new EmptyDarkSquare(x, y));
+				} else if (row.charAt(x) == myMan) {
+					DarkSquareWithMyMan darkSquareWithMyMan = new DarkSquareWithMyMan(x, y);
+					parsedRow.add(darkSquareWithMyMan);
+					myPieces.add(darkSquareWithMyMan);
+				} else if (row.charAt(x) == myKing) {
+					DarkSquareWithMyKing darkSquareWithMyKing = new DarkSquareWithMyKing(x, y);
+					parsedRow.add(darkSquareWithMyKing);
+					myPieces.add(darkSquareWithMyKing);
+				} else if (row.charAt(x) == opponentMan || row.charAt(x) == opponentKing) {
+					parsedRow.add(new DarkSquareWithOpponentPiece(x, y));
 				}
 			}
-			parsedBoardPosition.add(currentRow);
+			parsedRows.add(parsedRow);
 		}
-		parsedBoardPosition.linkSquares();
-		return parsedBoardPosition;
+		
+		for (List<DarkSquare> parsedRow : parsedRows) {
+			for (DarkSquare darkSquare : parsedRow) {
+				int x = darkSquare.getX();
+				int y = darkSquare.getY();
+				darkSquare.setAdjacentSquare(FORWARD_LEFT, getSquare(parsedRows, x - 1, y + forward));
+				darkSquare.setAdjacentSquare(FORWARD_RIGHT, getSquare(parsedRows, x + 1, y + forward));
+				darkSquare.setAdjacentSquare(BACKWARDS_LEFT, getSquare(parsedRows, x - 1, y - forward));
+				darkSquare.setAdjacentSquare(BACKWARDS_RIGHT, getSquare(parsedRows, x + 1, y - forward));
+			}
+		}
+
+		return myPieces;
+	}
+
+	private static Square getSquare(List<List<DarkSquare>> parsedRows, int x, int y) {
+		if (y < 0 || y >= parsedRows.size()) {
+			return OUT_OF_BOUNDS;
+		}
+		for (DarkSquare darkSquare : parsedRows.get(y)) {
+			if (darkSquare.getX() == x) {
+				return darkSquare;
+			}
+		}
+		return OUT_OF_BOUNDS;
+	}
+
+	class BoardPosition {
+		List<DarkSquareWithMyPiece> myPieces;
+
+		public void addMyPiece(DarkSquareWithMyPiece myPiece) {
+			myPieces.add(myPiece);
+		}
 	}
 }
