@@ -9,17 +9,13 @@ public class CaptureTurn implements Turn {
 	private final Direction endDirection;
 	private final List<DarkSquare> checkpoints = new ArrayList<>();
 
-	public CaptureTurn(Direction endDirection) {
-		this.endDirection = endDirection;
-	}
-
 	public CaptureTurn(CaptureTurn turnSoFar, EmptyDarkSquare landingSquare) {
 		this.endDirection = turnSoFar.getEndDirection();
 		this.checkpoints.addAll(turnSoFar.checkpoints);
 		this.checkpoints.add(landingSquare);
 	}
 
-	public CaptureTurn(DarkSquareWithPlayerMan startSquare, Direction endDirection) {
+	public CaptureTurn(DarkSquareWithPlayerPiece startSquare, Direction endDirection) {
 		this.endDirection = endDirection;
 		this.checkpoints.add(startSquare);
 	}

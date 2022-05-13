@@ -12,4 +12,9 @@ class DarkSquareWithOpponentPiece extends DarkSquare {
 	public List<Turn> jumpOverWithMan(CaptureTurn pathSoFar) {
 		return adjacentSquares.get(pathSoFar.getEndDirection()).landCaptureWithMan(pathSoFar);
 	}
+
+	@Override
+	public List<Turn> jumpOverWithKing(CaptureTurn pathSoFar) {
+		return adjacentSquares.get(pathSoFar.getEndDirection()).landCaptureWithKing(pathSoFar);
+	}
 }

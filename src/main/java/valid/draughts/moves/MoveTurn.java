@@ -5,7 +5,6 @@ public class MoveTurn implements Turn {
 	private final DarkSquareWithPlayerPiece start;
 	private final EmptyDarkSquare end;
 
-
 	public MoveTurn(DarkSquareWithPlayerPiece start, Direction endDirection) {
 		this.start = start;
 		this.endDirection = endDirection;

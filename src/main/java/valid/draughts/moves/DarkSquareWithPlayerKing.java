@@ -19,6 +19,10 @@ class DarkSquareWithPlayerKing extends DarkSquareWithPlayerPiece {
 				adjacentSquares.get(FORWARD_LEFT).movePlayerKing(new MoveTurn(this, FORWARD_LEFT)),
 				adjacentSquares.get(FORWARD_RIGHT).movePlayerKing(new MoveTurn(this, FORWARD_RIGHT)),
 				adjacentSquares.get(BACKWARD_LEFT).movePlayerKing(new MoveTurn(this, BACKWARD_LEFT)),
-				adjacentSquares.get(BACKWARD_RIGHT).movePlayerKing(new MoveTurn(this, BACKWARD_RIGHT)));
+				adjacentSquares.get(BACKWARD_RIGHT).movePlayerKing(new MoveTurn(this, BACKWARD_RIGHT)),
+				adjacentSquares.get(FORWARD_LEFT).jumpOverWithKing(new CaptureTurn(this, FORWARD_LEFT)),
+				adjacentSquares.get(FORWARD_RIGHT).jumpOverWithKing(new CaptureTurn(this, FORWARD_RIGHT)),
+				adjacentSquares.get(BACKWARD_LEFT).jumpOverWithKing(new CaptureTurn(this, BACKWARD_LEFT)),
+				adjacentSquares.get(BACKWARD_RIGHT).jumpOverWithKing(new CaptureTurn(this, BACKWARD_RIGHT)));
 	}
 }
