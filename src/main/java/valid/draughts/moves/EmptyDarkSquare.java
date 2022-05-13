@@ -10,21 +10,21 @@ class EmptyDarkSquare extends DarkSquare {
 	}
 
 	@Override
-	public List<Turn> endManMove(MovePath pathSoFar) {
-		return List.of(new Turn(new MovePath(pathSoFar, this)));
+	public List<Turn> endManMove(MoveTurn pathSoFar) {
+		return List.of(new MoveTurn(pathSoFar, this));
 	}
 
 	@Override
-	public List<Turn> landCaptureWithMan(CapturePath pathSoFar) {
-		return List.of(new Turn(new CapturePath(pathSoFar, this)));
+	public List<Turn> landCaptureWithMan(CaptureTurn pathSoFar) {
+		return List.of(new CaptureTurn(pathSoFar, this));
 	}
 
 	@Override
-	public List<Turn> movePlayerKing(MovePath pathSoFar) {
+	public List<Turn> movePlayerKing(MoveTurn pathSoFar) {
 		List<Turn> possibleTurns = new ArrayList<>();
-		MovePath pathUpToThis = new MovePath(pathSoFar, this);
-		possibleTurns.add(new Turn(pathUpToThis));
-		possibleTurns.addAll(adjacentSquares.get(pathSoFar.getDirection()).movePlayerKing(pathUpToThis));
+		MoveTurn turnEndingHere = new MoveTurn(pathSoFar, this);
+		possibleTurns.add(turnEndingHere);
+		possibleTurns.addAll(adjacentSquares.get(pathSoFar.getEndDirection()).movePlayerKing(turnEndingHere));
 		return possibleTurns;
 	}
 }

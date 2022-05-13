@@ -1,14 +1,6 @@
 package valid.draughts.moves;
 
-class Turn {
-	private final Path path;
+interface Turn {
 
-	public Turn(Path path) {
-		this.path = path;
-	}
-
-	@Override
-	public String toString() {
-		return path.toString();
-	}
+	Direction getEndDirection();
 }

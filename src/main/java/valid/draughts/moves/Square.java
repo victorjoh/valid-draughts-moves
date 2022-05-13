@@ -6,19 +6,19 @@ import java.util.List;
 
 interface Square {
 
-	default List<Turn> endManMove(MovePath pathSoFar) {
+	default List<Turn> endManMove(MoveTurn pathSoFar) {
 		return emptyList();
 	}
 
-	default List<Turn> jumpOverWithMan(CapturePath pathSoFar) {
+	default List<Turn> jumpOverWithMan(CaptureTurn pathSoFar) {
 		return emptyList();
 	}
 
-	default List<Turn> landCaptureWithMan(CapturePath pathSoFar) {
+	default List<Turn> landCaptureWithMan(CaptureTurn pathSoFar) {
 		return emptyList();
 	}
 
-	default List<Turn> movePlayerKing(MovePath pathSoFar) {
+	default List<Turn> movePlayerKing(MoveTurn pathSoFar) {
 		return emptyList();
 	}
 }

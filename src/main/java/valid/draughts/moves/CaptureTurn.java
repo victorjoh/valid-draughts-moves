@@ -5,27 +5,27 @@ import static java.util.stream.Collectors.joining;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CapturePath implements Path {
+public class CaptureTurn implements Turn {
 	private final Direction endDirection;
 	private final List<DarkSquare> checkpoints = new ArrayList<>();
 
-	public CapturePath(Direction endDirection) {
+	public CaptureTurn(Direction endDirection) {
 		this.endDirection = endDirection;
 	}
 
-	public CapturePath(CapturePath pathSoFar, EmptyDarkSquare landingSquare) {
-		this.endDirection = pathSoFar.getDirection();
-		this.checkpoints.addAll(pathSoFar.checkpoints);
+	public CaptureTurn(CaptureTurn turnSoFar, EmptyDarkSquare landingSquare) {
+		this.endDirection = turnSoFar.getEndDirection();
+		this.checkpoints.addAll(turnSoFar.checkpoints);
 		this.checkpoints.add(landingSquare);
 	}
 
-	public CapturePath(DarkSquareWithPlayerMan startSquare, Direction endDirection) {
+	public CaptureTurn(DarkSquareWithPlayerMan startSquare, Direction endDirection) {
 		this.endDirection = endDirection;
 		this.checkpoints.add(startSquare);
 	}
 
 	@Override
-	public Direction getDirection() {
+	public Direction getEndDirection() {
 		return endDirection;
 	}
 

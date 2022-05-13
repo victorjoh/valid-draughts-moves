@@ -1,30 +1,34 @@
 package valid.draughts.moves;
 
-public class MovePath implements Path {
+public class MoveTurn implements Turn {
 	private final Direction endDirection;
 	private final DarkSquareWithPlayerPiece start;
 	private final EmptyDarkSquare end;
 
 
-	public MovePath(DarkSquareWithPlayerPiece start, Direction endDirection) {
+	public MoveTurn(DarkSquareWithPlayerPiece start, Direction endDirection) {
 		this.start = start;
 		this.endDirection = endDirection;
 		this.end = null;
 	}
 
-	public MovePath(MovePath pathSoFar, EmptyDarkSquare end) {
+	public MoveTurn(MoveTurn pathSoFar, EmptyDarkSquare end) {
 		this.start = pathSoFar.start;
 		this.end = end;
-		this.endDirection = pathSoFar.getDirection();
+		this.endDirection = pathSoFar.getEndDirection();
 	}
 
 	@Override
-	public Direction getDirection() {
+	public Direction getEndDirection() {
 		return endDirection;
 	}
 
 	@Override
 	public String toString() {
+		if (end == null) {
+			return start.getId();
+		}
+
 		return start.getId() + '-' + end.getId();
 	}
 }
