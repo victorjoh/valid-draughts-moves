@@ -135,6 +135,34 @@ public class DraughtsTest {
 	}
 
 	@DataProvider
+	public Object[][] white_man_single_capture_blocked() {
+		return new Object[][] {
+				{ """
+						_.b
+						.b.
+						w._""", turns() },
+				{ """
+						_.K
+						.b.
+						w._""", turns() },
+				{ """
+						_.w
+						.b.
+						w._""", turns() },
+				{ """
+						_.b
+						.w.
+						_._""", turns("11-02") },
+		};
+	}
+
+	@Test(dataProvider = "white_man_single_capture_blocked")
+	void white_man_cannot_capture_black_pieces_if_there_is_nowhere_to_land(String position, String[] expectedTurns) {
+		assertThat(Draughts.getValidMoves(WHITE, position))
+				.containsExactlyInAnyOrder(expectedTurns);
+	}
+
+	@DataProvider
 	public Object[][] white_king_single_capture_turns() {
 		return new Object[][] {
 				{ """
@@ -162,6 +190,34 @@ public class DraughtsTest {
 
 	@Test(dataProvider = "white_king_single_capture_turns")
 	void white_king_can_capture_black_pieces(String position, String[] expectedTurns) {
+		assertThat(Draughts.getValidMoves(WHITE, position))
+				.containsExactlyInAnyOrder(expectedTurns);
+	}
+
+	@DataProvider
+	public Object[][] white_king_single_capture_blocked() {
+		return new Object[][] {
+				{ """
+						_.b
+						.b.
+						K._""", turns() },
+				{ """
+						_.K
+						.b.
+						K._""", turns() },
+				{ """
+						_.w
+						.b.
+						K._""", turns() },
+				{ """
+						_.b
+						.K.
+						_._""", turns("11-02", "11-20", "11-00") },
+		};
+	}
+
+	@Test(dataProvider = "white_king_single_capture_blocked")
+	void white_king_cannot_capture_black_pieces_if_there_is_nowhere_to_land(String position, String[] expectedTurns) {
 		assertThat(Draughts.getValidMoves(WHITE, position))
 				.containsExactlyInAnyOrder(expectedTurns);
 	}
