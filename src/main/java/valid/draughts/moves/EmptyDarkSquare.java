@@ -20,9 +20,9 @@ class EmptyDarkSquare extends DarkSquare {
 		CaptureTurn turnEndingHere = new CaptureTurn(pathSoFar, this);
 		List<Turn> possibleTurns = new ArrayList<>();
 		possibleTurns.add(turnEndingHere);
-		possibleTurns.addAll(adjacentSquares.entrySet().stream()
-				.filter(entry -> !entry.getKey().equals(pathSoFar.getEndDirection().getOpposite()))
-				.map(entry -> entry.getValue().jumpOverWithMan(new CaptureTurn(turnEndingHere, entry.getKey())))
+		possibleTurns.addAll(getAdjacentSquares().stream()
+				.filter(adjacent -> !adjacent.getDirection().equals(pathSoFar.getDirection().getOpposite()))
+				.map(adjacent -> adjacent.jumpOverWithMan(new CaptureTurn(turnEndingHere, adjacent.getDirection())))
 				.flatMap(Collection::stream)
 				.toList());
 		return possibleTurns;
@@ -33,7 +33,7 @@ class EmptyDarkSquare extends DarkSquare {
 		MoveTurn turnEndingHere = new MoveTurn(turnSoFar, this);
 		List<Turn> possibleTurns = new ArrayList<>();
 		possibleTurns.add(turnEndingHere);
-		possibleTurns.addAll(adjacentSquares.get(turnSoFar.getEndDirection()).moveKing(turnEndingHere));
+		possibleTurns.addAll(getAdjacentSquare(turnSoFar.getDirection()).moveKing(turnEndingHere));
 		return possibleTurns;
 	}
 
@@ -41,7 +41,7 @@ class EmptyDarkSquare extends DarkSquare {
 	public List<Turn> landCaptureWithKing(CaptureTurn turnSoFar) {
 		List<Turn> possibleTurns = new ArrayList<>();
 		possibleTurns.add(new CaptureTurn(turnSoFar, this));
-		possibleTurns.addAll(adjacentSquares.get(turnSoFar.getEndDirection()).landCaptureWithKing(turnSoFar));
+		possibleTurns.addAll(getAdjacentSquare(turnSoFar.getDirection()).landCaptureWithKing(turnSoFar));
 		return possibleTurns;
 	}
 }

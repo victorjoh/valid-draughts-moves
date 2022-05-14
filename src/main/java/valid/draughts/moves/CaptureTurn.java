@@ -10,7 +10,7 @@ public class CaptureTurn implements Turn {
 	private final List<DarkSquare> checkpoints = new ArrayList<>();
 
 	public CaptureTurn(CaptureTurn turnSoFar, EmptyDarkSquare landingSquare) {
-		this.endDirection = turnSoFar.getEndDirection();
+		this.endDirection = turnSoFar.getDirection();
 		this.checkpoints.addAll(turnSoFar.checkpoints);
 		this.checkpoints.add(landingSquare);
 	}
@@ -31,7 +31,7 @@ public class CaptureTurn implements Turn {
 	}
 
 	@Override
-	public Direction getEndDirection() {
+	public Direction getDirection() {
 		return endDirection;
 	}
 

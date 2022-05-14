@@ -1,21 +1,29 @@
 package valid.draughts.moves;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 abstract class DarkSquare implements Square {
-	protected final Map<Direction, Square> adjacentSquares;
+	private final Map<Direction, AdjacentSquare> adjacentSquares = new EnumMap<>(Direction.class);
 	private final int x;
 	private final int y;
 
 	DarkSquare(int x, int y) {
-		adjacentSquares = new EnumMap<>(Direction.class);
 		this.x = x;
 		this.y = y;
 	}
 
+	AdjacentSquare getAdjacentSquare(Direction direction) {
+		return adjacentSquares.get(direction);
+	}
+
+	List<AdjacentSquare> getAdjacentSquares() {
+		return List.copyOf(adjacentSquares.values());
+	}
+
 	void setAdjacentSquare(Direction fromThisSquare, Square adjecentSquare) {
-		adjacentSquares.put(fromThisSquare, adjecentSquare);
+		adjacentSquares.put(fromThisSquare, new AdjacentSquare(fromThisSquare, adjecentSquare));
 	}
 
 	int getX() {

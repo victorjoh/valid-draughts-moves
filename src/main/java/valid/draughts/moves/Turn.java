@@ -4,5 +4,5 @@ interface Turn {
 
 	int getNbrOfCaptures();
 
-	Direction getEndDirection();
+	Direction getDirection();
 }

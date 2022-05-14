@@ -4,6 +4,7 @@ import static valid.draughts.moves.Direction.BACKWARD_LEFT;
 import static valid.draughts.moves.Direction.BACKWARD_RIGHT;
 import static valid.draughts.moves.Direction.FORWARD_LEFT;
 import static valid.draughts.moves.Direction.FORWARD_RIGHT;
+import static valid.draughts.moves.ListUtil.concatenate;
 
 import java.util.List;
 
@@ -15,14 +16,22 @@ class DarkSquareWithPlayerKing extends DarkSquareWithPlayerPiece {
 
 	@Override
 	public List<Turn> getPlayerTurns() {
-		return ListUtil.concatenate(
-				adjacentSquares.get(FORWARD_LEFT).moveKing(new MoveTurn(this, FORWARD_LEFT)),
-				adjacentSquares.get(FORWARD_RIGHT).moveKing(new MoveTurn(this, FORWARD_RIGHT)),
-				adjacentSquares.get(BACKWARD_LEFT).moveKing(new MoveTurn(this, BACKWARD_LEFT)),
-				adjacentSquares.get(BACKWARD_RIGHT).moveKing(new MoveTurn(this, BACKWARD_RIGHT)),
-				adjacentSquares.get(FORWARD_LEFT).jumpOverWithKing(new CaptureTurn(this, FORWARD_LEFT)),
-				adjacentSquares.get(FORWARD_RIGHT).jumpOverWithKing(new CaptureTurn(this, FORWARD_RIGHT)),
-				adjacentSquares.get(BACKWARD_LEFT).jumpOverWithKing(new CaptureTurn(this, BACKWARD_LEFT)),
-				adjacentSquares.get(BACKWARD_RIGHT).jumpOverWithKing(new CaptureTurn(this, BACKWARD_RIGHT)));
+		return concatenate(
+				move(FORWARD_LEFT),
+				move(FORWARD_RIGHT),
+				move(BACKWARD_LEFT),
+				move(BACKWARD_RIGHT),
+				capture(FORWARD_LEFT),
+				capture(FORWARD_RIGHT),
+				capture(BACKWARD_LEFT),
+				capture(BACKWARD_RIGHT));
+	}
+
+	private List<Turn> move(Direction direction) {
+		return getAdjacentSquare(direction).moveKing(new MoveTurn(this, direction));
+	}
+
+	private List<Turn> capture(Direction direction) {
+		return getAdjacentSquare(direction).jumpOverWithKing(new CaptureTurn(this, direction));
 	}
 }

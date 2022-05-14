@@ -14,7 +14,7 @@ public class MoveTurn implements Turn {
 	public MoveTurn(MoveTurn pathSoFar, EmptyDarkSquare end) {
 		this.start = pathSoFar.start;
 		this.end = end;
-		this.endDirection = pathSoFar.getEndDirection();
+		this.endDirection = pathSoFar.getDirection();
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class MoveTurn implements Turn {
 	}
 
 	@Override
-	public Direction getEndDirection() {
+	public Direction getDirection() {
 		return endDirection;
 	}
 
