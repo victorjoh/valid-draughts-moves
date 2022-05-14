@@ -193,6 +193,12 @@ public class DraughtsTest {
 						_._._
 						.b.B.
 						_._.w""", turns("40x22x00") },
+				{ """
+						_._._
+						.b.b.
+						_._._
+						.b.b.
+						w._._""", turns("00x22x40", "00x22x44", "00x22x04") },
 		};
 	}
 
