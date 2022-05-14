@@ -18,6 +18,11 @@ public class MoveTurn implements Turn {
 	}
 
 	@Override
+	public int getNbrOfCaptures() {
+		return 0;
+	}
+
+	@Override
 	public Direction getEndDirection() {
 		return endDirection;
 	}

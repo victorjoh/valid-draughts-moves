@@ -1,5 +1,6 @@
 package valid.draughts.moves;
 
+import static valid.draughts.moves.MaxTurns.noTurns;
 import static valid.draughts.moves.ParsingConfig.getParsingConfig;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public class Draughts {
 		return parseBoardPosition(player, position).stream()
 				.map(DarkSquareWithPlayerPiece::getPlayerTurns)
 				.flatMap(Collection::stream)
+				.reduce(noTurns(), MaxTurns::getTurnsWithMaxNbrOfCaptures, MaxTurns::getTurnsWithMaxNbrOfCaptures)
+				.stream()
 				.map(Object::toString)
 				.toList();
 	}

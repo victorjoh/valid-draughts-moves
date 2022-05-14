@@ -18,7 +18,7 @@ interface Square {
 		return emptyList();
 	}
 
-	default List<Turn> movePlayerKing(MoveTurn turnSoFar) {
+	default List<Turn> moveKing(MoveTurn turnSoFar) {
 		return emptyList();
 	}
 

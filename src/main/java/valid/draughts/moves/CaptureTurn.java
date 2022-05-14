@@ -15,9 +15,19 @@ public class CaptureTurn implements Turn {
 		this.checkpoints.add(landingSquare);
 	}
 
+	public CaptureTurn(CaptureTurn turnSoFar, Direction endDirection) {
+		this.endDirection = endDirection;
+		this.checkpoints.addAll(turnSoFar.checkpoints);
+	}
+
 	public CaptureTurn(DarkSquareWithPlayerPiece startSquare, Direction endDirection) {
 		this.endDirection = endDirection;
 		this.checkpoints.add(startSquare);
+	}
+
+	@Override
+	public int getNbrOfCaptures() {
+		return checkpoints.size() - 1;
 	}
 
 	@Override

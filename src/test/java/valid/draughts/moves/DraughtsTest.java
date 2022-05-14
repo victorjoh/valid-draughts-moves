@@ -165,4 +165,40 @@ public class DraughtsTest {
 		assertThat(Draughts.getValidMoves(WHITE, position))
 				.containsExactlyInAnyOrder(expectedTurns);
 	}
+
+	@DataProvider
+	public Object[][] white_man_multiple_capture_turns() {
+		return new Object[][] {
+				{ """
+						_._._
+						._._.
+						_._._
+						.b.B.
+						w._._""", turns("00x22x40") },
+				{ """
+						_._._
+						._.B.
+						_._._
+						.b._.
+						w._._""", turns("00x22x44") },
+				{ """
+						_._._
+						.B._.
+						_._._
+						.b._.
+						w._._""", turns("00x22x04") },
+				{ """
+						_._._
+						._._.
+						_._._
+						.b.B.
+						_._.w""", turns("40x22x00") },
+		};
+	}
+
+	@Test(dataProvider = "white_man_multiple_capture_turns")
+	void white_man_can_capture_multiple_black_pieces(String position, String[] expectedTurns) {
+		assertThat(Draughts.getValidMoves(WHITE, position))
+				.containsExactlyInAnyOrder(expectedTurns);
+	}
 }

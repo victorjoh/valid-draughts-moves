@@ -1,6 +1,7 @@
 package valid.draughts.moves;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 class EmptyDarkSquare extends DarkSquare {
@@ -16,15 +17,23 @@ class EmptyDarkSquare extends DarkSquare {
 
 	@Override
 	public List<Turn> landCaptureWithMan(CaptureTurn pathSoFar) {
-		return List.of(new CaptureTurn(pathSoFar, this));
+		CaptureTurn turnEndingHere = new CaptureTurn(pathSoFar, this);
+		List<Turn> possibleTurns = new ArrayList<>();
+		possibleTurns.add(turnEndingHere);
+		possibleTurns.addAll(adjacentSquares.entrySet().stream()
+				.filter(entry -> !entry.getKey().equals(pathSoFar.getEndDirection().getOpposite()))
+				.map(entry -> entry.getValue().jumpOverWithMan(new CaptureTurn(turnEndingHere, entry.getKey())))
+				.flatMap(Collection::stream)
+				.toList());
+		return possibleTurns;
 	}
 
 	@Override
-	public List<Turn> movePlayerKing(MoveTurn turnSoFar) {
+	public List<Turn> moveKing(MoveTurn turnSoFar) {
 		List<Turn> possibleTurns = new ArrayList<>();
 		MoveTurn turnEndingHere = new MoveTurn(turnSoFar, this);
 		possibleTurns.add(turnEndingHere);
-		possibleTurns.addAll(adjacentSquares.get(turnSoFar.getEndDirection()).movePlayerKing(turnEndingHere));
+		possibleTurns.addAll(adjacentSquares.get(turnSoFar.getEndDirection()).moveKing(turnEndingHere));
 		return possibleTurns;
 	}
 
