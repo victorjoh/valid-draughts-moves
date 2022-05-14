@@ -30,8 +30,8 @@ class EmptyDarkSquare extends DarkSquare {
 
 	@Override
 	public List<Turn> moveKing(MoveTurn turnSoFar) {
-		List<Turn> possibleTurns = new ArrayList<>();
 		MoveTurn turnEndingHere = new MoveTurn(turnSoFar, this);
+		List<Turn> possibleTurns = new ArrayList<>();
 		possibleTurns.add(turnEndingHere);
 		possibleTurns.addAll(adjacentSquares.get(turnSoFar.getEndDirection()).moveKing(turnEndingHere));
 		return possibleTurns;

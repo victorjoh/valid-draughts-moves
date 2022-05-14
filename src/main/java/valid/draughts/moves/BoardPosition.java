@@ -8,7 +8,7 @@ import static valid.draughts.moves.Direction.FORWARD_RIGHT;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardPosition {
+class BoardPosition {
 	private static final OutOfBoundsSquare OUT_OF_BOUNDS = new OutOfBoundsSquare();
 
 	private final ParsingConfig config;
@@ -27,7 +27,7 @@ public class BoardPosition {
 		playerPieces.add(playerPiece);
 	}
 
-	public void linkSquares() {
+	void linkSquares() {
 		for (List<DarkSquare> row : rows) {
 			for (DarkSquare square : row) {
 				int x = square.getX();
@@ -52,7 +52,7 @@ public class BoardPosition {
 		return OUT_OF_BOUNDS;
 	}
 
-	public List<DarkSquareWithPlayerPiece> getPlayerPieces() {
+	List<DarkSquareWithPlayerPiece> getPlayerPieces() {
 		return playerPieces;
 	}
 }
