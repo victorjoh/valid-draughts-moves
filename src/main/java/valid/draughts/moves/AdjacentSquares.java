@@ -19,7 +19,7 @@ class AdjacentSquares {
 	}
 
 	AdjacentSquares add(AdjacentSquare square) {
-		return new AdjacentSquares(ListUtil.concatenate(squares, List.of(square)));
+		return new AdjacentSquares(Lists.concatenate(squares, List.of(square)));
 	}
 
 	AdjacentSquares excluding(Direction direction) {

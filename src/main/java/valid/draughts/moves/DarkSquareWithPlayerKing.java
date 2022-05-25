@@ -4,7 +4,7 @@ import static valid.draughts.moves.Direction.BACKWARD_LEFT;
 import static valid.draughts.moves.Direction.BACKWARD_RIGHT;
 import static valid.draughts.moves.Direction.FORWARD_LEFT;
 import static valid.draughts.moves.Direction.FORWARD_RIGHT;
-import static valid.draughts.moves.ListUtil.concatenate;
+import static valid.draughts.moves.Lists.concatenate;
 
 import java.util.List;
 

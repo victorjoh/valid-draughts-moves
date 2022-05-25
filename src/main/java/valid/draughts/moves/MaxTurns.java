@@ -1,7 +1,7 @@
 package valid.draughts.moves;
 
 import static java.util.Collections.emptyList;
-import static valid.draughts.moves.ListUtil.concatenate;
+import static valid.draughts.moves.Lists.concatenate;
 
 import java.util.List;
 import java.util.stream.Stream;

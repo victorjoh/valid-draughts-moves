@@ -1,6 +1,6 @@
 package valid.draughts.moves;
 
-import static valid.draughts.moves.ListUtil.concatenate;
+import static valid.draughts.moves.Lists.concatenate;
 
 import java.util.List;
 
