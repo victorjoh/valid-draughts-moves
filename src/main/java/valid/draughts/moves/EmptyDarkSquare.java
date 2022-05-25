@@ -1,7 +1,7 @@
 package valid.draughts.moves;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import static valid.draughts.moves.ListUtil.concatenate;
+
 import java.util.List;
 
 class EmptyDarkSquare extends DarkSquare {
@@ -11,37 +11,41 @@ class EmptyDarkSquare extends DarkSquare {
 	}
 
 	@Override
-	public List<Turn> endManMove(MoveTurn pathSoFar) {
-		return List.of(new MoveTurn(pathSoFar, this));
+	public List<Turn> endManMove(MoveTurn turnSoFar) {
+		return List.of(new MoveTurn(turnSoFar, this));
 	}
 
 	@Override
-	public List<Turn> landCaptureWithMan(CaptureTurn pathSoFar) {
-		CaptureTurn turnEndingHere = new CaptureTurn(pathSoFar, this);
-		List<Turn> possibleTurns = new ArrayList<>();
-		possibleTurns.add(turnEndingHere);
-		possibleTurns.addAll(getAdjacentSquares().stream()
-				.filter(adjacent -> !adjacent.getDirection().equals(pathSoFar.getDirection().getOpposite()))
-				.map(adjacent -> adjacent.jumpOverWithMan(new CaptureTurn(turnEndingHere, adjacent.getDirection())))
-				.flatMap(Collection::stream)
-				.toList());
-		return possibleTurns;
+	public List<Turn> landCaptureWithMan(CaptureTurn turnSoFar) {
+		CaptureTurn turnLandingHere = new CaptureTurn(turnSoFar, this);
+		return concatenate(
+				List.of(turnLandingHere),
+				getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
+						.map(Square::jumpOverWithMan)
+						.withTurnSoFar(turnLandingHere));
 	}
 
 	@Override
 	public List<Turn> moveKing(MoveTurn turnSoFar) {
-		MoveTurn turnEndingHere = new MoveTurn(turnSoFar, this);
-		List<Turn> possibleTurns = new ArrayList<>();
-		possibleTurns.add(turnEndingHere);
-		possibleTurns.addAll(getAdjacentSquare(turnSoFar.getDirection()).moveKing(turnEndingHere));
-		return possibleTurns;
+		MoveTurn turnLandingHere = new MoveTurn(turnSoFar, this);
+		return concatenate(
+				List.of(turnLandingHere),
+				getAdjacentSquare(turnSoFar.getDirection()).moveKing(turnLandingHere));
+	}
+
+	@Override
+	public List<Turn> jumpOverWithKing(CaptureTurn turnSoFar) {
+		return getAdjacentSquare(turnSoFar.getDirection()).jumpOverWithKing(turnSoFar);
 	}
 
 	@Override
 	public List<Turn> landCaptureWithKing(CaptureTurn turnSoFar) {
-		List<Turn> possibleTurns = new ArrayList<>();
-		possibleTurns.add(new CaptureTurn(turnSoFar, this));
-		possibleTurns.addAll(getAdjacentSquare(turnSoFar.getDirection()).landCaptureWithKing(turnSoFar));
-		return possibleTurns;
+		CaptureTurn turnLandingHere = new CaptureTurn(turnSoFar, this);
+		return concatenate(
+				List.of(turnLandingHere),
+				getAdjacentSquare(turnSoFar.getDirection()).landCaptureWithKing(turnSoFar),
+				getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
+						.map(Square::jumpOverWithKing)
+						.withTurnSoFar(turnLandingHere));
 	}
 }

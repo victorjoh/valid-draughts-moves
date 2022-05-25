@@ -5,6 +5,7 @@ import static valid.draughts.moves.PlayerColor.BLACK;
 import static valid.draughts.moves.PlayerColor.WHITE;
 
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class DraughtsTest {
@@ -185,6 +186,11 @@ public class DraughtsTest {
 						.b._
 						_._.
 						._._""", turns("03x21", "03x30") },
+				{ """
+						K._.
+						._._
+						_.b.
+						._._""", turns("03x30") },
 		};
 	}
 
@@ -260,6 +266,94 @@ public class DraughtsTest {
 
 	@Test(dataProvider = "white_man_multiple_capture_turns")
 	void white_man_can_capture_multiple_black_pieces(String position, String[] expectedTurns) {
+		assertThat(Draughts.getValidMoves(WHITE, position))
+				.containsExactlyInAnyOrder(expectedTurns);
+	}
+
+	@DataProvider
+	public Object[][] white_king_multiple_capture_turns() {
+		return new Object[][] {
+				{ """
+						_._._
+						._._.
+						_._._
+						.b.B.
+						K._._""", turns("00x22x40") },
+				{ """
+						_._._
+						._.B.
+						_._._
+						.b._.
+						K._._""", turns("00x22x44") },
+				{ """
+						_._._
+						.B._.
+						_._._
+						.b._.
+						K._._""", turns("00x22x04") },
+				{ """
+						_._._
+						._._.
+						_._._
+						.b.B.
+						_._.K""", turns("40x22x00") },
+				{ """
+						_._._
+						.b.b.
+						_._._
+						.b.b.
+						K._._""", turns("00x22x40", "00x22x44", "00x22x04") },
+				{ """
+						_._._.
+						.b._._
+						_._.B.
+						._._.K""", turns("50x23x01") },
+				{ """
+						_._._.
+						.b._._
+						_._._.
+						._._._
+						_._.B.
+						._._.K""", turns("50x32x05", "50x23x05") },
+				{ """
+						_._._.
+						.b._._
+						_._._.
+						.b._._
+						_._.B.
+						._._.K""", turns("50x23x01", "50x32x05", "50x23x05") },
+		};
+	}
+
+	@Test(dataProvider = "white_king_multiple_capture_turns")
+	void white_king_can_capture_multiple_black_pieces(String position, String[] expectedTurns) {
+		assertThat(Draughts.getValidMoves(WHITE, position))
+				.containsExactlyInAnyOrder(expectedTurns);
+	}
+
+	@DataProvider
+	public Object[][] tricky() {
+		return new Object[][] {
+				{ """
+						_.w._
+						.b.b.
+						_._._
+						.b.b.
+						_._._""", turns("24x42x20x02x24", "24x02x20x42x24") },
+				//				{ """
+				//						_._._
+				//						.b._.
+				//						_.w._
+				//						.b.b.
+				//						_._._
+				//						.b.b.
+				//						_._._""", turns("24x42x20x02", "24x02x20x42") },
+		};
+	}
+
+	@Ignore
+	@Test(dataProvider = "tricky")
+	void something(String position, String[] expectedTurns) {
 		assertThat(Draughts.getValidMoves(WHITE, position))
 				.containsExactlyInAnyOrder(expectedTurns);
 	}
