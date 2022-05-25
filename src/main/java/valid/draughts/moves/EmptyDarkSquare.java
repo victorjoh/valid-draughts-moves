@@ -30,7 +30,7 @@ class EmptyDarkSquare extends DarkSquare {
 		MoveTurn turnLandingHere = new MoveTurn(turnSoFar, this);
 		return concatenate(
 				List.of(turnLandingHere),
-				getAdjacentSquare(turnSoFar.getDirection()).moveKing(turnLandingHere));
+				getAdjacentSquare(turnSoFar.getDirection()).moveKing(turnSoFar));
 	}
 
 	@Override

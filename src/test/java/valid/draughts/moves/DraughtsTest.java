@@ -5,7 +5,6 @@ import static valid.draughts.moves.PlayerColor.BLACK;
 import static valid.draughts.moves.PlayerColor.WHITE;
 
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class DraughtsTest {
@@ -340,18 +339,17 @@ public class DraughtsTest {
 						_._._
 						.b.b.
 						_._._""", turns("24x42x20x02x24", "24x02x20x42x24") },
-				//				{ """
-				//						_._._
-				//						.b._.
-				//						_.w._
-				//						.b.b.
-				//						_._._
-				//						.b.b.
-				//						_._._""", turns("24x42x20x02", "24x02x20x42") },
+				{ """
+						_._._
+						.b._.
+						_.w._
+						.b.b.
+						_._._
+						.b.b.
+						_._._""", turns("24x42x20x02x24x06", "24x02x20x42x24x06") },
 		};
 	}
 
-	@Ignore
 	@Test(dataProvider = "tricky")
 	void something(String position, String[] expectedTurns) {
 		assertThat(Draughts.getValidMoves(WHITE, position))

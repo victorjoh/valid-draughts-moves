@@ -9,7 +9,7 @@ public class CaptureTurn implements Turn {
 	private final Direction endDirection;
 	private final List<DarkSquare> checkpoints = new ArrayList<>();
 
-	public CaptureTurn(CaptureTurn turnSoFar, EmptyDarkSquare landingSquare) {
+	public CaptureTurn(CaptureTurn turnSoFar, DarkSquare landingSquare) {
 		this.endDirection = turnSoFar.getDirection();
 		this.checkpoints.addAll(turnSoFar.checkpoints);
 		this.checkpoints.add(landingSquare);
@@ -40,5 +40,9 @@ public class CaptureTurn implements Turn {
 		return checkpoints.stream()
 				.map(DarkSquare::getId)
 				.collect(joining("x"));
+	}
+
+	public boolean startsWith(DarkSquareWithPlayerPiece square) {
+		return checkpoints.get(0) == square;
 	}
 }

@@ -1,5 +1,6 @@
 package valid.draughts.moves;
 
+import static java.util.Collections.emptyList;
 import static valid.draughts.moves.Direction.BACKWARD_LEFT;
 import static valid.draughts.moves.Direction.BACKWARD_RIGHT;
 import static valid.draughts.moves.Direction.FORWARD_LEFT;
@@ -31,5 +32,14 @@ class DarkSquareWithPlayerMan extends DarkSquareWithPlayerPiece {
 
 	private List<Turn> capture(Direction direction) {
 		return getAdjacentSquare(direction).jumpOverWithMan(new CaptureTurn(this, direction));
+	}
+
+	@Override
+	public List<Turn> landCaptureWithMan(CaptureTurn turnSoFar) {
+		if (turnSoFar.startsWith(this)) {
+			return List.of(new CaptureTurn(turnSoFar, this));
+		} else {
+			return emptyList();
+		}
 	}
 }
