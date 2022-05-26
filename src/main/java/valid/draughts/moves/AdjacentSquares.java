@@ -22,13 +22,7 @@ class AdjacentSquares {
 		return new AdjacentSquares(Lists.concatenate(squares, List.of(square)));
 	}
 
-	AdjacentSquares excluding(Direction direction) {
-		return new AdjacentSquares(squares.stream()
-				.filter(square -> !square.getDirection().equals(direction))
-				.toList());
-	}
-	
-	AdjacentSquaresTurnStep map(BiFunction<Square, CaptureTurn, List<Turn>> turnContinuation) {
+	AdjacentSquaresTurnStep continueCapture(BiFunction<Square, CaptureTurn, List<Turn>> turnContinuation) {
 		return new AdjacentSquaresTurnStep(turnContinuation);
 	}
 

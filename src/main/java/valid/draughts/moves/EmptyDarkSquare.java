@@ -24,8 +24,8 @@ class EmptyDarkSquare extends DarkSquare {
 		CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
 		return concatenate(
 				List.of(turnLandingHere),
-				getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
-						.map(Square::jumpOverWithMan)
+				getAdjacentSquares()
+						.continueCapture(Square::jumpOverWithMan)
 						.withTurnSoFar(turnLandingHere));
 	}
 
@@ -48,8 +48,8 @@ class EmptyDarkSquare extends DarkSquare {
 		return concatenate(
 				List.of(turnLandingHere),
 				getAdjacentSquare(turnSoFar.getDirection()).landCaptureWithKing(turnSoFar),
-				getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
-						.map(Square::jumpOverWithKing)
+				getAdjacentSquares()
+						.continueCapture(Square::jumpOverWithKing)
 						.withTurnSoFar(turnLandingHere));
 	}
 }
