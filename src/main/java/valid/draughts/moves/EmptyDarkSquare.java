@@ -17,7 +17,7 @@ class EmptyDarkSquare extends DarkSquare {
 
 	@Override
 	public List<Turn> landCaptureWithMan(CaptureTurn turnSoFar) {
-		CaptureTurn turnLandingHere = new CaptureTurn(turnSoFar, this);
+		CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
 		return concatenate(
 				List.of(turnLandingHere),
 				getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
@@ -40,7 +40,7 @@ class EmptyDarkSquare extends DarkSquare {
 
 	@Override
 	public List<Turn> landCaptureWithKing(CaptureTurn turnSoFar) {
-		CaptureTurn turnLandingHere = new CaptureTurn(turnSoFar, this);
+		CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
 		return concatenate(
 				List.of(turnLandingHere),
 				getAdjacentSquare(turnSoFar.getDirection()).landCaptureWithKing(turnSoFar),

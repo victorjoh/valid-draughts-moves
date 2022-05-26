@@ -42,7 +42,7 @@ class AdjacentSquares {
 		public List<Turn> withTurnSoFar(CaptureTurn turnLandingOnCenterSquare) {
 			return squares.stream()
 					.map(square -> turnContinuation.apply(square,
-							new CaptureTurn(turnLandingOnCenterSquare, square.getDirection())))
+							turnLandingOnCenterSquare.redirect(square.getDirection())))
 					.flatMap(Collection::stream)
 					.toList();
 		}

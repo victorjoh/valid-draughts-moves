@@ -331,7 +331,7 @@ public class DraughtsTest {
 	}
 
 	@DataProvider
-	public Object[][] tricky() {
+	public Object[][] start_square_revisited() {
 		return new Object[][] {
 				{ """
 						_.w._
@@ -347,11 +347,29 @@ public class DraughtsTest {
 						_._._
 						.b.b.
 						_._._""", turns("24x42x20x02x24x06", "24x02x20x42x24x06") },
+				{ """
+						_.K._
+						.b.b.
+						_._._
+						.b.b.
+						_._._""", turns("24x42x20x02x24", "24x02x20x42x24") },
+				{ """
+						_._._
+						.b._.
+						_.K._
+						.b.b.
+						_._._
+						.b.b.
+						_._._""", turns("24x42x20x02x24x06", "24x02x20x42x24x06") },
+
 		};
 	}
 
-	@Test(dataProvider = "tricky")
-	void something(String position, String[] expectedTurns) {
+	@Test(dataProvider = "start_square_revisited")
+	void when_capturing_and_landing_on_the_start_square_then_the_start_square_acts_as_an_empty_square(
+			String position,
+			String[] expectedTurns
+	) {
 		assertThat(Draughts.getValidMoves(WHITE, position))
 				.containsExactlyInAnyOrder(expectedTurns);
 	}

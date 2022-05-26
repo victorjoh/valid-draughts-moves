@@ -37,7 +37,12 @@ class DarkSquareWithPlayerMan extends DarkSquareWithPlayerPiece {
 	@Override
 	public List<Turn> landCaptureWithMan(CaptureTurn turnSoFar) {
 		if (turnSoFar.startsWith(this)) {
-			return List.of(new CaptureTurn(turnSoFar, this));
+			CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
+			return concatenate(
+					List.of(turnLandingHere),
+					getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
+							.map(Square::jumpOverWithMan)
+							.withTurnSoFar(turnLandingHere));
 		} else {
 			return emptyList();
 		}

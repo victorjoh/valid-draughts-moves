@@ -1,5 +1,6 @@
 package valid.draughts.moves;
 
+import static java.util.Collections.emptyList;
 import static valid.draughts.moves.Direction.BACKWARD_LEFT;
 import static valid.draughts.moves.Direction.BACKWARD_RIGHT;
 import static valid.draughts.moves.Direction.FORWARD_LEFT;
@@ -33,5 +34,19 @@ class DarkSquareWithPlayerKing extends DarkSquareWithPlayerPiece {
 
 	private List<Turn> capture(Direction direction) {
 		return getAdjacentSquare(direction).jumpOverWithKing(new CaptureTurn(this, direction));
+	}
+
+	@Override
+	public List<Turn> landCaptureWithKing(CaptureTurn turnSoFar) {
+		if (turnSoFar.startsWith(this)) {
+			CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
+			return concatenate(
+					List.of(turnLandingHere),
+					getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
+							.map(Square::jumpOverWithKing)
+							.withTurnSoFar(turnLandingHere));
+		} else {
+			return emptyList();
+		}
 	}
 }
