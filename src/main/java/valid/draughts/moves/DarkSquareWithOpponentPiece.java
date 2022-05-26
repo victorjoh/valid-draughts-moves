@@ -3,6 +3,7 @@ package valid.draughts.moves;
 import static java.util.Collections.emptyList;
 
 import java.util.List;
+import java.util.function.BiFunction;
 
 class DarkSquareWithOpponentPiece extends DarkSquare {
 
@@ -12,21 +13,24 @@ class DarkSquareWithOpponentPiece extends DarkSquare {
 
 	@Override
 	public List<Turn> jumpOverWithMan(CaptureTurn turnSoFar) {
-		if (turnSoFar.isCaptured(this)) {
-			return emptyList();
-		} else {
-			return getAdjacentSquare(turnSoFar.getDirection())
-					.landCaptureWithMan(turnSoFar.addCapture(this));
-		}
+		return jumpOverWithPiece(turnSoFar, AdjacentSquare::landCaptureWithMan);
 	}
 
 	@Override
 	public List<Turn> jumpOverWithKing(CaptureTurn turnSoFar) {
+		return jumpOverWithPiece(turnSoFar, AdjacentSquare::landCaptureWithKing);
+	}
+
+	private List<Turn> jumpOverWithPiece(
+			CaptureTurn turnSoFar,
+			BiFunction<AdjacentSquare, CaptureTurn, List<Turn>> landingType
+	) {
 		if (turnSoFar.isCaptured(this)) {
 			return emptyList();
 		} else {
-			return getAdjacentSquare(turnSoFar.getDirection())
-					.landCaptureWithKing(turnSoFar.addCapture(this));
+			return landingType.apply(
+					getAdjacentSquare(turnSoFar.getDirection()),
+					turnSoFar.addCapture(this));
 		}
 	}
 }

@@ -42,6 +42,7 @@ class DarkSquareWithPlayerKing extends DarkSquareWithPlayerPiece {
 			CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
 			return concatenate(
 					List.of(turnLandingHere),
+					getAdjacentSquare(turnSoFar.getDirection()).landCaptureWithKing(turnSoFar),
 					getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
 							.map(Square::jumpOverWithKing)
 							.withTurnSoFar(turnLandingHere));
