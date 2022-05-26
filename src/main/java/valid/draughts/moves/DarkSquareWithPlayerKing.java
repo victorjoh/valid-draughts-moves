@@ -37,6 +37,15 @@ class DarkSquareWithPlayerKing extends DarkSquareWithPlayerPiece {
 	}
 
 	@Override
+	public List<Turn> jumpOverWithKing(CaptureTurn turnSoFar) {
+		if (turnSoFar.startsWith(this)) {
+			return getAdjacentSquare(turnSoFar.getDirection()).jumpOverWithKing(turnSoFar);
+		} else {
+			return emptyList();
+		}
+	}
+
+	@Override
 	public List<Turn> landCaptureWithKing(CaptureTurn turnSoFar) {
 		if (turnSoFar.startsWith(this)) {
 			CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
