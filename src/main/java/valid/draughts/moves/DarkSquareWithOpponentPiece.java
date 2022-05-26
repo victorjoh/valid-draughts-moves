@@ -23,12 +23,12 @@ class DarkSquareWithOpponentPiece extends DarkSquare {
 
 	private List<Turn> jumpOverWithPiece(
 			CaptureTurn turnSoFar,
-			BiFunction<AdjacentSquare, CaptureTurn, List<Turn>> landingType
+			BiFunction<AdjacentSquare, CaptureTurn, List<Turn>> landing
 	) {
 		if (turnSoFar.isCaptured(this)) {
 			return emptyList();
 		} else {
-			return landingType.apply(
+			return landing.apply(
 					getAdjacentSquare(turnSoFar.getDirection()),
 					turnSoFar.addCapture(this));
 		}
