@@ -3,13 +3,18 @@ package valid.draughts.moves;
 import static java.util.Collections.emptyList;
 
 abstract class DarkSquare implements Square {
-	private AdjacentSquares adjacentSquares = new AdjacentSquares(emptyList());
 	private final int x;
 	private final int y;
+	private AdjacentSquares adjacentSquares;
 
 	DarkSquare(int x, int y) {
+		this(x, y, new AdjacentSquares(emptyList()));
+	}
+
+	DarkSquare(int x, int y, AdjacentSquares adjacentSquares) {
 		this.x = x;
 		this.y = y;
+		this.adjacentSquares = adjacentSquares;
 	}
 
 	AdjacentSquare getAdjacentSquare(Direction direction) {

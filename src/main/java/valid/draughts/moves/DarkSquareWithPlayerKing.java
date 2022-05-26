@@ -39,7 +39,7 @@ class DarkSquareWithPlayerKing extends DarkSquareWithPlayerPiece {
 	@Override
 	public List<Turn> jumpOverWithKing(CaptureTurn turnSoFar) {
 		if (turnSoFar.startsWith(this)) {
-			return getAdjacentSquare(turnSoFar.getDirection()).jumpOverWithKing(turnSoFar);
+			return asEmptySquare().jumpOverWithKing(turnSoFar);
 		} else {
 			return emptyList();
 		}
@@ -48,13 +48,7 @@ class DarkSquareWithPlayerKing extends DarkSquareWithPlayerPiece {
 	@Override
 	public List<Turn> landCaptureWithKing(CaptureTurn turnSoFar) {
 		if (turnSoFar.startsWith(this)) {
-			CaptureTurn turnLandingHere = turnSoFar.addCheckpoint(this);
-			return concatenate(
-					List.of(turnLandingHere),
-					getAdjacentSquare(turnSoFar.getDirection()).landCaptureWithKing(turnSoFar),
-					getAdjacentSquares().excluding(turnSoFar.getDirection().getOpposite())
-							.map(Square::jumpOverWithKing)
-							.withTurnSoFar(turnLandingHere));
+			return asEmptySquare().landCaptureWithKing(turnSoFar);
 		} else {
 			return emptyList();
 		}

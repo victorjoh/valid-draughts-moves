@@ -8,5 +8,9 @@ abstract class DarkSquareWithPlayerPiece extends DarkSquare {
 		super(x, y);
 	}
 
+	EmptyDarkSquare asEmptySquare() {
+		return new EmptyDarkSquare(getX(), getY(), getAdjacentSquares());
+	}
+
 	abstract List<Turn> getPlayerTurns();
 }

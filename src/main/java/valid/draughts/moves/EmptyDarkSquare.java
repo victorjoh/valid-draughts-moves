@@ -10,6 +10,10 @@ class EmptyDarkSquare extends DarkSquare {
 		super(x, y);
 	}
 
+	EmptyDarkSquare(int x, int y, AdjacentSquares adjacentSquares) {
+		super(x, y, adjacentSquares);
+	}
+
 	@Override
 	public List<Turn> endManMove(MoveTurn turnSoFar) {
 		return List.of(new MoveTurn(turnSoFar, this));
